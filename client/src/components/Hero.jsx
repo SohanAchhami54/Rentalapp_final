@@ -8,7 +8,7 @@ const Hero = () => {
   return (
    <>
       <div className='h-screen flex flex-col justify-center items-center gap-13 bg-light text-center'>
-         <h1 className='text-5xl font-medium'>Luxury cars on Rent</h1>
+         <h1 className='text-5xl font-medium mt-25 sm:mt-30 md:mt-1'>Luxury cars on Rent</h1>
          <form action="" className='flex flex-col items-start md:items-center justify-between p-6 rounded-lg md:rounded-full w-full md:max-w-200 shadow-2xl '>
              <div className='flex flex-col md:flex-row items-start md:items-center gap-10 '>
                 {/* this is for select list  */}

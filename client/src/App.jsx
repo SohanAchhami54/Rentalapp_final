@@ -9,9 +9,13 @@ import Managecar from "./pages/owner/Managecar";
 import Addcar from "./pages/owner/Addcar";
 import Managebooking from "./pages/owner/Managebooking";
 import DashBoard from "./pages/owner/DashBoard";
+import { useState } from "react";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 
 
 const App = () => {
+  const [showLogin,setShowLogin]=useState(false);
   const router = createBrowserRouter([
     {
       path: '/',
@@ -32,6 +36,14 @@ const App = () => {
         {
           path:'/mybooking',
           element:<MyBooking/>
+        },
+           {
+          path:'/login',
+          element:<Login/>
+        },
+        {
+          path:'/signup',
+          element:<Signup/>
         },
         {
           path:'/owner',
@@ -54,13 +66,17 @@ const App = () => {
               element:<Managebooking/>
             }
           ]
-        }
+        },
+     
       ]
     }
   ]);
 
   return (
-    <RouterProvider router={router} />
+    <>
+     {/* {showLogin&&<Login setShowLogin={setShowLogin}/>} */}
+      <RouterProvider router={router} />
+    </>
   );
 };
 

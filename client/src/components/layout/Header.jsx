@@ -46,14 +46,14 @@
 // export default Header
 //    This specifies a translation value of zero. When applied to translate-x, it means the element will not be shifted horizontally.
   import { useState } from "react";
-   import { Button } from '../../aceternity/Button';
   import { GiHamburgerMenu } from "react-icons/gi";
   import { RxCross1 } from "react-icons/rx";
   import { NavLink, useLocation } from "react-router-dom";
+import { Button } from "../../shadcnui/button";
 
   const Header = () => {
     const [open,setOpen]=useState(false);
-    const [showLogin,setShowLogin]=useState(false);//setter function that will open the login form.
+   // const [showLogin,setShowLogin]=useState(false);//setter function that will open the login form.
     const isOwnerPath=useLocation().pathname.startsWith('/owner'); //owner path.
     return (
       <header className="bg-neutral-200">
@@ -71,7 +71,11 @@
           <NavLink to={'/car'} ><li>Car</li></NavLink> 
           <NavLink to={'/mybooking'} > <li>My Booking</li> </NavLink> 
            <NavLink to={'/owner'} ><li>Dashboard</li></NavLink>
-          <li><Button onClick={()=>setShowLogin(true)}>Login</Button></li>
+           <div className="flex gap-2">
+      <li><Button className="bg-black text-white"> <NavLink to={'/login'}>Login</NavLink> </Button></li>
+      <li><Button className="bg-black text-white"> <NavLink to={'/signup'} >SignUp</NavLink> </Button> </li>
+          </div>
+           {/* <li><Button onClick={()=>setShowLogin(true)}>Login</Button></li> */}
             </ul>
           </section>  
           {open&&(
@@ -80,8 +84,10 @@
             <ul className='flex flex-col gap-10'>
             <NavLink to={'/'} onClick={()=>setOpen(false)}><li>Home</li> </NavLink> 
             <NavLink to={'/car'}  onClick={()=>setOpen(false)}><li>Car</li></NavLink> 
-            <NavLink to={'/mybooking'}   onClick={()=>setOpen(false)}> <li>My Booking</li> </NavLink> 
-            <Button  onClick={()=>setOpen(false)}>Login</Button>
+            <NavLink to={'/mybooking'}   onClick={()=>setOpen(false)}> <li> Booking</li> </NavLink> 
+            {/* <Button  onClick={()=>setOpen(false)}>Login</Button> */}
+       <NavLink to={'/login'}   onClick={()=>setOpen(false)}> <li><Button className="bg-black text-white">login</Button></li></NavLink> 
+       <NavLink to={'/signup'}  onClick={()=>setOpen(false)}> <li><Button className="bg-black text-white">Signup</Button></li></NavLink> 
             </ul>
           </section>
           )}
