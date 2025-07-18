@@ -17,7 +17,7 @@ const Hero = () => {
   return (
    <>
       <div className='h-screen flex flex-col justify-center items-center gap-13 bg-light text-center'>
-         <h1 className='text-5xl font-medium mt-25 sm:mt-30 md:mt-1'>Luxury Bikes on Rent</h1>
+         <h1 className='text-5xl font-medium mt-25 sm:mt-30 md:mt-1'> Bikes on Rent</h1>
          {/* <form action="" 
           className='flex flex-col items-start md:items-center justify-between p-6 rounded-lg md:rounded-full w-full md:max-w-200 shadow-2xl '>
              <div className='flex flex-col md:flex-row items-start md:items-center gap-10 '> */}
@@ -49,8 +49,13 @@ const Hero = () => {
                     variant="outline">Search<IoMdSearch /> </Button>
              </div>
          </form> */}
-          <img src={assets.main_car}  alt="car" className='max-h-74' />
-          {/* <img src={assets.homebike} alt='bike' className='w-20 h-30' /> */}
+          {/* <img src={assets.main_car}  alt="car" className='max-h-74' /> */}
+          <div className='grid grid-cols-1  justify-center items-center'>
+          {/* <img src={assets.yamahaBike22} alt='bike1' className='max-h-80' /> */}
+          {/* <img src={assets.heroBike} alt='bike2' className='max-h-80' /> */}
+          <img src={assets.ducatiBike} alt='bike2' className='max-h-80 w-full'  />
+          </div>
+         
    
       </div>
    </>

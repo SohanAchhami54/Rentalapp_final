@@ -12,14 +12,17 @@ import DashBoard from "./pages/owner/DashBoard";
 import {Login} from "./components/Login";
 import {Signup} from "./components/Signup";
 import  {Toaster} from 'react-hot-toast'; //to display the toast notification.
+import ProtectedRoute from "./components/ProtectedRoute";
 // import { useAppcontext } from "./context/AppContext";
 
 const App = () => {
-  // const {showLogin}=useAppcontext();
+    // const {user}=useAppcontext();
   const router = createBrowserRouter([
     {
+      
       path: '/',
       element: <Mainlayout/>,
+      //unauthorized
       children: [
         {
           path:'/',
@@ -33,10 +36,7 @@ const App = () => {
           path: '/bike',
           element:<Cars/>
         },
-        {
-          path:'/mybooking',
-          element:<MyBooking/>
-        },
+       
            {
           path:'/login',
           element:<Login/>
@@ -45,9 +45,25 @@ const App = () => {
           path:'/signup',
           element:<Signup/>
         },
+
+        // protectedRoute 
+         {
+          path:'/mybooking',
+           element: (
+          <ProtectedRoute allowedRoles={['guest']}>
+             <MyBooking />
+          </ProtectedRoute>
+        )
+          // element:<MyBooking/>
+        },
         {
           path:'/owner',
-          element:<OwnerLaout/>,
+            element: (
+         <ProtectedRoute allowedRoles={['host']}>
+             <OwnerLaout />
+          </ProtectedRoute>
+        ),
+          // element:<OwnerLaout/>,
           children:[
             {
                path:'/owner',
@@ -64,7 +80,7 @@ const App = () => {
             {
               path:'/owner/managebook',
               element:<Managebooking/>
-            }
+            },
           ]
         },
      
@@ -83,3 +99,4 @@ const App = () => {
 };
 
 export default App;
+
