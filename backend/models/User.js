@@ -4,11 +4,18 @@ const userSchema=mongoose.Schema({
         type:String,
         required:[true,'Fullname is requires']
     },
-    lastname:String,
+    lastname:{
+        type:String,
+        required:[true,'Lastname is requires']
+    },
     usertype:{
         type:String,
         enum:['guest','host'],
         default:'guest',
+    },
+    address:{
+        type:String,
+        required:[true,'Email is required'],
     },
     email:{
         type:String,

@@ -9,13 +9,13 @@ import Managecar from "./pages/owner/Managecar";
 import Addcar from "./pages/owner/Addcar";
 import Managebooking from "./pages/owner/Managebooking";
 import DashBoard from "./pages/owner/DashBoard";
-import { useState } from "react";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-
+import {Login} from "./components/Login";
+import {Signup} from "./components/Signup";
+import  {Toaster} from 'react-hot-toast'; //to display the toast notification.
+// import { useAppcontext } from "./context/AppContext";
 
 const App = () => {
-  const [showLogin,setShowLogin]=useState(false);
+  // const {showLogin}=useAppcontext();
   const router = createBrowserRouter([
     {
       path: '/',
@@ -26,11 +26,11 @@ const App = () => {
           element:<Home/>
         },
         {
-          path: '/cardetail/:id',
+          path: '/bikedetail/:id',
           element:<CarDetails/>,
         },
         {
-          path: '/car',
+          path: '/bike',
           element:<Cars/>
         },
         {
@@ -75,7 +75,9 @@ const App = () => {
   return (
     <>
      {/* {showLogin&&<Login setShowLogin={setShowLogin}/>} */}
-      <RouterProvider router={router} />
+      <Toaster/>
+          <RouterProvider router={router} />
+
     </>
   );
 };

@@ -16,8 +16,8 @@ const Banner = () => {
          <p>We take care of insurance,driver certification and secure payments-
             so you can earn passive income,stress-free
          </p>
-         <Button onClick={()=>{navigate('/car')}}
-          className='w-30 bg-black text-white'>List your car</Button>
+         <Button onClick={()=>{navigate('/bike')}}
+          className='w-30 bg-black text-white'>List your Bike</Button>
          
        </div>
        <div className='sm:w-[250px] sm:h-[250px] md:w-[300px] md:h-[300px] overflow-hidden rounded-full'>

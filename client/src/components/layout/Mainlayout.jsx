@@ -7,8 +7,8 @@ const Mainlayout = () => {
     <>
     <Header/>
       <Outlet/>
-   {!isOwnerPath&&
-    <Footer/>}  
+   
+    <Footer/>  
     </>
   )
 }

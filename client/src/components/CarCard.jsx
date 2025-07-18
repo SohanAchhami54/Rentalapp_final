@@ -1,13 +1,20 @@
 //this is car component and this page show all the car details  
 import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
-const CarCard = ({car}) => {
- const currency=import.meta.env.VITE_CURRENCY; //yo chai env variable ko data ho.
+import { useAppcontext } from "../context/AppContext";
+const CarCard = ({car,isHost=false}) => {
+ const {currency}=useAppcontext();
  const navigate=useNavigate();
+ const handleClick=()=>{
+    if(!isHost ){
+      navigate(`/bikedetail/${car._id}`)
+    }
+ }
   return (
    <>
      {/* this function is used to go to the individual webpage of each car */}
-     <div onClick={()=>{navigate(`/cardetail/${car._id}`);scrollTo(0,0)}}
+     {/* <div onClick={()=>{navigate(`/bikedetail/${car._id}`);scrollTo(0,0)}} */}
+       <div onClick={handleClick}
       className='group rounded-xl overflow-hidden shadow-lg   transition-all duration-500
       cursor-pointe hover:translate-y-2 cursor-pointer'>
         {/* this is for image */}

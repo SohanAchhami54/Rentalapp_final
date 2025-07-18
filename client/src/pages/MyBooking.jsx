@@ -1,24 +1,36 @@
 //this is for the booking data.
 import { useEffect, useState } from "react"
-import { assets, dummyMyBookingsData } from "../assets/assets";
+import { assets} from "../assets/assets";
 import Title from "../components/Title";
+import { useAppcontext } from "../context/AppContext";
+import toast from "react-hot-toast";
 
 const MyBooking = () => {
+const {axios,user,currency}=useAppcontext();
 const [bookings,setBookings]=useState([]);
-const currency=import.meta.env.VITE_CURRENCY;
 const fetchMyBookings=async()=>{
-  setBookings(dummyMyBookingsData)
+    try {
+      const {data}=await axios.get('/api/booking/user');
+      console.log(data);  
+      if(data.success){
+        setBookings(data.bookings); 
+      }else{
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
 } 
 //whennever we load this component this useEffect will run
 //and it will  fetch the dummyMyBookingsData 
 //and set the value of the bookings state.
  useEffect(()=>{
-   fetchMyBookings();
-},[])
+   user && fetchMyBookings();
+},[user])
   return (
    <>
    {/* max-w-7xl sets Limits the maximum width of the container */}
-   <div className="px-6 md:px-16 lg:px-24 xl:px-32 2xl:px-48 mt-16 text-sm  max-w-7xl">
+   <div className="px-6 md:px-16 lg:px-24 xl:px-32 2xl:px-48 mt-16 text-sm  max-w-7xl h-screen">
       {/* this is the title components */}
        <Title title='My Bookings' subTitle='View and manage your all vehicle bookings'/>
        
@@ -33,9 +45,9 @@ const fetchMyBookings=async()=>{
                {/* <div className=""> */}
                 <div className="">
                   {/* The aspect-video class in Tailwind CSS sets an element's aspect ratio to 16:9, commonly used for videos. */}
-                   <img src={booking.car.image} alt="booking car" className="w-full h-auto aspect-video object-cover"/>
-                     <p className="text-lg font-medium mt-2">{booking.car.brand } {booking.car.model} </p>
-                     <p className="text-gray-500">{booking.car.year}.{booking.car.category}.{booking.car.location} </p>
+                   <img src={booking.bike.image} alt="booking car" className="w-full h-auto aspect-video object-cover"/>
+                     <p className="text-lg font-medium mt-2">{booking.bike.brand } {booking.bike.model} </p>
+                     <p className="text-gray-500">{booking.bike.year}.{booking.bike.category}.{booking.bike.location} </p>
                 </div>
                 {/* booking pending information */}
                 {/* it take two column md:col-span-2 */}
@@ -65,7 +77,7 @@ const fetchMyBookings=async()=>{
                              <div>
                               <p className="text-gray-500">Pickup Location</p>
                               {/* take the date part only before T  not after that */}
-                              <p>{booking.pickupDate.split('T')[0]} To {booking.returnDate.split('T')[0]} </p>
+                              <p>{booking.bike.location} </p>
                              </div>
                              
                       </div>

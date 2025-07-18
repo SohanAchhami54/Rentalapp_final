@@ -1,27 +1,43 @@
 import React, { useEffect, useState } from 'react'
-import { assets, dummyDashboardData } from '../../assets/assets';
+import { assets } from '../../assets/assets';
 import Title from './Title';
+import { useAppcontext } from '../../context/AppContext';
+import toast from 'react-hot-toast';
 
 const DashBoard = () => {
-  const currency=import.meta.env.VITE_CURRENCY;
+  const {axios,isOwner,currency}=useAppcontext();
   const [data,setData]=useState({
-    totalCars:0,
-    totalBookings:0,
-    pendingBookings:0,
-    completedBookings:0,
-    recentBookings: [],
-    monthlyRevenue:0
+    totalbikes:0,
+    totalbooking:0,
+    pendingbooking:0,
+    completebooking:0,
+    recentbooking: [],
+     monthlyRevenue:0
   });
 
   const dashboardCards=[
-     {title:'Total Cars',value:data.totalCars,icon:assets.carIconColored},
-     {title:'Total Bookings',value:data.totalBookings,icon:assets.listIconColored},
-     {title:'Pending',value:data.pendingBookings,icon:assets.cautionIconColored},
-     {title:'Confirmed',value:data.completedBookings,icon:assets.listIconColored},
+     {title:'Total Cars',value:data.totalbikes,icon:assets.carIconColored},
+     {title:'Total Bookings',value:data.totalbooking,icon:assets.listIconColored},
+     {title:'Pending',value:data.pendingbooking,icon:assets.cautionIconColored},
+     {title:'Confirmed',value:data.completebooking,icon:assets.listIconColored},
   ]
 
-  useEffect(()=>{
-    setData(dummyDashboardData);
+  const fetchDashboardData=async()=>{
+        try {
+          const {data}=await axios.get('/api/owner/dashboard')
+          if(data.success){
+            setData(data.dashboardData);
+          }else{
+            toast(data.message);
+          }
+        } catch (error) {
+          toast.error(error.message)
+        }
+  }
+  useEffect(()=>{  //when this component gets load for the first time.
+    //  if(isOwner){
+       fetchDashboardData();
+    //  }
   },[]);
 
 
@@ -58,7 +74,7 @@ const DashBoard = () => {
                
                <ul className=''>
                 {
-                      data.recentBookings.map((bookdata,index)=>{
+                      data.recentbooking.map((bookdata,index)=>{
                           return <li key={index} className='mt-3 flex justify-between'>
                             {/* this is first div  */}
                               <div className='flex items-center  gap-2'>
@@ -68,7 +84,7 @@ const DashBoard = () => {
                                 </div>
 
                                 <div>
-                                  <p>{bookdata.car.brand} {bookdata.car.model } </p>
+                                  <p>{bookdata.bike.brand} {bookdata.bike.model } </p>
                                   <p className='text-sm text-gray-500'>{bookdata.createdAt.split('T')[0]} </p>
                                   </div>
                               </div>

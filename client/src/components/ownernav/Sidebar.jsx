@@ -1,16 +1,33 @@
 import { useState } from 'react';
 import { assets, dummyUserData, ownerMenuLinks } from '../../assets/assets';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useAppcontext } from '../../context/AppContext';
+import toast from 'react-hot-toast';
 
 const Sidebar = () => {
-  const user = dummyUserData;
+  const {user,axios,fetchUser } = useAppcontext();
   const location = useLocation();
   const [image, setImage] = useState('');
 
-  const updateImage = async () => {
-    user.image = URL.createObjectURL(image);
-    setImage('');
+
+  const updateImage = async () => {  //for updating the image section.
+     try {
+      const formData=new FormData();
+      formData.append('image',image);
+      const {data}=await axios.post('/api/owner/updateimage',formData);
+      if(data.success){
+        fetchUser();
+        toast.success(data.message);
+        setImage('');
+      }else{
+        toast.error(data.message);
+      }
+
+     } catch (error) {
+        toast.error(error.message);
+     }
   };
+
 
   return (
     <div className='relative  flex flex-col items-center pt-8 max-w-13 md:max-w-55 w-full
@@ -50,7 +67,7 @@ const Sidebar = () => {
       </div>
 
       {/* User Name */}
-      <p className='mt-2 text-xs sm:text-md md:text-base'>Sohan</p>
+      <p className='mt-2 text-xs sm:text-md md:text-base'>{user.firstname} </p>
 
       {/* Menu Items */}
       <div className='w-full flex flex-col gap-4 mt-4'>

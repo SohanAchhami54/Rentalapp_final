@@ -1,18 +1,61 @@
-import React, { useEffect, useState } from 'react'
-import { dummyCarData } from '../../assets/assets'
+import { useEffect, useState } from 'react'
 import Title from './Title';
 import { FaRegEyeSlash } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
+import { useAppcontext } from '../../context/AppContext';
+import toast from 'react-hot-toast';
+
 const Managecar = () => {
-const currency=import.meta.env.VITE_CURRENCY;
-const [cars,setCars]=useState([]);
-const fetchOwnerCars=async()=>{
-  setCars(dummyCarData);
+const {isOwner,axios,currency}=useAppcontext();
+const [bike,setBike]=useState([]);
+
+const fetchOwnerBikes=async()=>{
+    try {
+      const {data}=await axios.get('/api/owner/bikes');
+      if(data.success){
+          setBike(data.bikes);
+      }else{
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
 }
 
+const toggleAvailability=async(bikeId)=>{
+  try {
+    const {data}= await axios.post('/api/owner/toggle-bike',{bikeId});
+    if(data.success){
+      toast.success(data.message);
+      fetchOwnerBikes();
+    }else{
+      toast.error(data.message);
+    }
+  } catch (error) {
+     toast.error(error.message)
+  }
+}
+
+  const deleteBike=async(bikeId)=>{
+
+      try {
+        const confirm =window.confirm('Are you sure want to delete the Bike?');//either we get true or false.
+        if(!confirm) return null;//true nai xaina vaney yo hunxa.
+
+        const {data}=await axios.post('/api/owner/delete-bike',{bikeId});
+        if(data.success){
+          toast.success(data.message);
+          fetchOwnerBikes(); //data base bata feri naya data lai fetch garna ko lagi.
+        }else{
+          toast.error(data.message);//if the user is unauthorized
+        }
+      } catch (error) { //server error
+        toast.error(error.message);
+      }
+  }
 useEffect(()=>{  //whenver the component is loaded.
-  fetchOwnerCars();
+  fetchOwnerBikes();
 },[])
   return (
     <>
@@ -34,49 +77,62 @@ useEffect(()=>{  //whenver the component is loaded.
      
                  <tbody>
 
-                    {
-                      cars.map((car,index)=>{
-                        return <tr key={index} className='border-t borderColor'>
-                          {/* td ma flex so  */}
-                          
-                               {/* first data  */}
-                                <td className='p-3 flex items-center gap-3'>
-                                {/* first element  */}
-                                 <img src={car.image}  className='h-12 w-12 aspect-square object-cover rounded-md' alt="" />
-                                 {/* mobile ma chai yo hidden hunxa  */}
-                                <div className='max-md:hidden flex flex-col gap-1'>
-                                 <p className='font-medium'>{car.model}{car.brand} </p>
-                                 <p className='font-medium'>{car.transmission} </p>
-                                </div>
-                                </td>
+      {
+         bike.map((bike,index)=>{
+           return <tr key={index} className='border-t borderColor'>
+             {/* td ma flex so  */}
+             
+                  {/* first data  */}
+                   <td className='p-3 flex items-center gap-3'>
+                   {/* first element  */}
+                    <img src={bike.image}  className='h-12 w-12 aspect-square object-cover rounded-md' alt="" />
+                    {/* mobile ma chai yo hidden hunxa  */}
+                   <div className='max-md:hidden flex flex-col gap-1'>
+                    <p className='font-medium'>{bike.model}{bike.brand} </p>
+                    <p className='font-medium'>{bike.transmission} </p>
+                   </div>
+                   </td>
 
-                               {/* second data  */}
-                                <td className='p-3 max-md:hidden'>{car.category} </td>
+                  {/* second data  */}
+                   <td className='p-3 max-md:hidden'>{bike.category} </td>
 
-                                {/* third data  */}
-                                <td className='p-3'>{currency} {car.pricePerDay}/day </td>
+              {/* third data  */}
+              <td className='p-3'>{currency} {bike.pricePerDay}/day </td>
 
-                                {/* fourth data  */}
-                                 <td className='max-md:hidden p-3'>
-                                   <span  className={`px-2 py-1 rounded ${car.isAvaliable?'bg-green-300':'bg-red-300'}`}
-                                   >{car.isAvaliable?'Available':'Unavailable'} </span>
-                                  </td>
+              {/* fourth data  */}
+               <td className='max-md:hidden p-3  '>
+                 <span  className={`px-2 py-1 rounded ${bike.isAvailable?'bg-green-300':'bg-red-300'}`}
+                 >{bike.isAvailable ?'Available':'Unavailable'} </span>
+                </td>
 
-                               {/* fifth data  */}
-                                   <td className='p-3'>
-                                    <div className='flex gap-2 justify-around items-center'>
-                                    {car.isAvaliable ? <FaRegEyeSlash className='text-lg'/>:<FaRegEye    className='text-lg'  />}
-                                     <MdDeleteForever className='text-xl text-red-600' />
+             {/* fifth data  */}
+                 <td className='p-3'>
+                  {/* <div className='flex gap-2 justify-around items-center'>
+                   {bike.isAvaliable ?
+                   <FaRegEyeSlash  onClick={()=> toggleAvailability(bike._id,false)}
+                   className='text-lg'/>
+                   :<FaRegEye    onClick={() => toggleAvailability(bike._id, true)} 
+                    className='text-lg'  />}
+                   <MdDeleteForever className='text-xl text-red-600' />
 
-                                   </div>
-                                   </td>
-                                  
+                 </div> */}
 
-                                
-                                      
-                        </tr>
-                      })
+                 <div className='flex gap-2  justify-around items-center'>
+                  {bike.isAvailable?
+                   <FaRegEyeSlash onClick={()=>toggleAvailability(bike._id)}
+                   className='text-lg'/>
+                   :
+                   <FaRegEye  onClick={()=>toggleAvailability(bike._id)}
+                   className='text-lg'/>
+
                     }
+                    <MdDeleteForever onClick={()=>deleteBike(bike._id)}
+                      className='text-xl text-red-600' />
+                 </div>
+                 </td>
+                  </tr>
+                   })
+                }
                  
                  </tbody>
 
