@@ -1,5 +1,5 @@
 import Banner from "../components/Banner"
-import Featurecar from "../components/Featurecar"
+import Featurecar from "../components/Featurebike"
 import Hero from "../components/Hero"
 import { AnimatedTestimonialsDemo } from "../components/Testimonial"
 

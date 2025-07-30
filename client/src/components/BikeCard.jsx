@@ -2,12 +2,12 @@
 import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { useAppcontext } from "../context/AppContext";
-const CarCard = ({car,isHost=false}) => {
+const BikeCard = ({bike,isHost=false}) => {
  const {currency}=useAppcontext();
  const navigate=useNavigate();
  const handleClick=()=>{
     if(!isHost ){
-      navigate(`/bikedetail/${car._id}`)
+      navigate(`/bikedetail/${bike._id}`)
     }
  }
   return (
@@ -19,11 +19,11 @@ const CarCard = ({car,isHost=false}) => {
       cursor-pointe hover:translate-y-2 cursor-pointer'>
         {/* this is for image */}
         <div className='relative h-50 w-full overflow-hidden'>
-            <img src={car.image} alt="car image" className='w-full h-full object-cover transition-all duration-500 ease   hover:scale-105' />
-            {car.isAvailable&& <p className='absolute top-4 left-4 bg-blue-600 text-white text-xs
+            <img src={bike.image} alt="car image" className='w-full h-full object-cover transition-all duration-500 ease   hover:scale-105' />
+            {bike.isAvailable&& <p className='absolute top-4 left-4 bg-blue-600 text-white text-xs
             px-2.5 py-1 rounded-full'>Available now</p>}
             <div className='absolute bottom-4 right-4 bg-black text-white px-3 py-2 rounded-lg'>
-               <span className='font-semibold'>{currency}{car.pricePerDay} </span>
+               <span className='font-semibold'>{currency}{bike.pricePerDay} </span>
                <span className='text-sm text-white/80'>/day</span>
             </div>
         </div>
@@ -31,29 +31,29 @@ const CarCard = ({car,isHost=false}) => {
         <div className="p-4 sm:p-5 ">
             {/* this is for car name */}
             <div>
-            <h3 className="text-lg font-medium">{car.brand} {car.model} </h3>
-            <p>{car.category} {car.year}</p>
+            <h3 className="text-lg font-medium">{bike.brand} {bike.model} </h3>
+            <p>{bike.category} {bike.year}</p>
            </div>
            <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2 items-center h-20 text-gray-600">
                  <div className="flex items-center text-sm gap-1">  
                     {/* user icon */}
                     <img src={assets.users_icon}  alt="" className="h-4 " />
-                    <span className="text-xs sm:text-sm">{car.seating_capacity} </span>
+                    <span className="text-xs sm:text-sm">{bike.seating_capacity} </span>
                  </div>
                     {/* fuel icon */}
                    <div className="flex items-center text-sm  gap-1">  
                     <img src={assets.fuel_icon}  alt="" className="h-4 " />
-                    <span className="text-xs sm:text-sm">{car.fuel_type} </span>
+                    <span className="text-xs sm:text-sm">{bike.fuel_type} </span>
                  </div>
                    {/* this is for car icon */}
                    <div className="flex items-center text-sm  gap-1">  
                     <img src={assets.car_icon}  alt="" className="h-4 " />
-                    <span  className="text-xs sm:text-sm">{car.transmission} </span>
+                    <span  className="text-xs sm:text-sm">{bike.transmission} </span>
                  </div>
                    {/* this is for location  */}
                    <div className="flex items-center text-sm  gap-1">  
                     <img src={assets.location_icon}  alt="" className="h-4 " />
-                    <span className="text-xs sm:text-sm">{car.location} </span>
+                    <span className="text-xs sm:text-sm">{bike.location} </span>
                  </div>
            </div>
         </div>
@@ -62,4 +62,4 @@ const CarCard = ({car,isHost=false}) => {
   )
 }
 //we can mount this component in any page.
-export default CarCard
+export default BikeCard

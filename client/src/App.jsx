@@ -1,18 +1,19 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Mainlayout from "./components/layout/Mainlayout";
 import Home from "./pages/Home";
-import CarDetails from "./pages/CarDetails";
+import BikeDetails from "./pages/BikeDetails";
 import MyBooking from "./pages/MyBooking";
-import Cars from "./pages/Cars";
+import Bikes from "./pages/Bikes";
 import OwnerLaout from "./components/ownernav/OwnerLaout";
-import Managecar from "./pages/owner/Managecar";
-import Addcar from "./pages/owner/Addcar";
+import Addbike from "./pages/owner/Addbike";
+import Managebike from "./pages/owner/Managebike";
 import Managebooking from "./pages/owner/Managebooking";
 import DashBoard from "./pages/owner/DashBoard";
 import {Login} from "./components/Login";
 import {Signup} from "./components/Signup";
 import  {Toaster} from 'react-hot-toast'; //to display the toast notification.
 import ProtectedRoute from "./components/ProtectedRoute";
+
 // import { useAppcontext } from "./context/AppContext";
 
 const App = () => {
@@ -30,11 +31,11 @@ const App = () => {
         },
         {
           path: '/bikedetail/:id',
-          element:<CarDetails/>,
+          element:<BikeDetails/>,
         },
         {
           path: '/bike',
-          element:<Cars/>
+          element:<Bikes/>
         },
        
            {
@@ -50,18 +51,18 @@ const App = () => {
          {
           path:'/mybooking',
            element: (
-          <ProtectedRoute allowedRoles={['guest']}>
+          // <ProtectedRoute allowedRoles={['guest']}>
              <MyBooking />
-          </ProtectedRoute>
+          // </ProtectedRoute>
         )
           // element:<MyBooking/>
         },
         {
           path:'/owner',
             element: (
-         <ProtectedRoute allowedRoles={['host']}>
+        //  <ProtectedRoute allowedRoles={['host']}>
              <OwnerLaout />
-          </ProtectedRoute>
+          // </ProtectedRoute>
         ),
           // element:<OwnerLaout/>,
           children:[
@@ -70,12 +71,12 @@ const App = () => {
                element:<DashBoard/>
             },
             {
-              path:'/owner/managecar',
-              element:<Managecar/>,
+              path:'/owner/managebike',
+              element:<Managebike/>,
             },
             {
-              path:'/owner/addcar',
-              element:<Addcar/>
+              path:'/owner/addbike',
+              element:<Addbike/>
             },
             {
               path:'/owner/managebook',

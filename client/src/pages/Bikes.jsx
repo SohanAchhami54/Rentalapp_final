@@ -92,11 +92,11 @@ import { useEffect, useState } from "react"
 import { assets } from "../assets/assets"
 import Title from "../components/Title"
 import { Input } from "../shadcnui/input"
-import CarCard from "../components/CarCard"
+import CarCard from "../components/BikeCard"
 import { useSearchParams } from "react-router-dom"
 import { useAppcontext } from "../context/AppContext"
 
-const Cars = () => {
+const Bikes = () => {
   const [searchParams] = useSearchParams();
   const pickupLocation = searchParams.get('pickupLocation');
   const pickupDate = searchParams.get('pickupDate');
@@ -152,10 +152,10 @@ const Cars = () => {
             Showing {filteredBike.length} data
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-4 xl:px-20 max-w-7xl mx-auto">
-            {filteredBike.map((car, index) => (
+            {filteredBike.map((bike, index) => (
               <li key={index}>
                 {/* ✅ Prevent host from opening CarDetails */}
-                <CarCard car={car} isHost={user?.usertype === 'host'} />
+                <CarCard bike={bike} isHost={user?.usertype === 'host'} />
               </li>
             ))}
           </div>
@@ -165,4 +165,4 @@ const Cars = () => {
   );
 };
 
-export default Cars;
+export default Bikes;

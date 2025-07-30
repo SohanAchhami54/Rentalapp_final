@@ -4,7 +4,7 @@ import { assets, dummyCarData } from "../assets/assets";
 import { Button } from "../shadcnui/button";
 import { useAppcontext } from "../context/AppContext";
 import toast from "react-hot-toast";
-const CarDetails = () => {
+const BikeDetails = () => {
   const { id } = useParams(); //it takes the id of particular page //{id: '67ff6b758f1b3684286a2a65'}
   const navigate = useNavigate();
   const {bike,axios,currency,pickupDate,setPickupDate,returnDate,setReturnDate}=useAppcontext();
@@ -147,4 +147,4 @@ const CarDetails = () => {
   );
 };
 
-export default CarDetails;
+export default BikeDetails;

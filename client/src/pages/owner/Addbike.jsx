@@ -7,7 +7,7 @@ import { Button } from '../../shadcnui/button';
 import { useAppcontext } from '../../context/AppContext';
 import toast from 'react-hot-toast'
 
-const Addcar = () => {
+const Addbike = () => {
   const {axios,currency}=useAppcontext();
   const [image,setImage]=useState(null);//this is for image.
   const [bike,setBike]=useState({ //bike details
@@ -209,4 +209,4 @@ const Addcar = () => {
   )
 }
 
-export default Addcar
+export default Addbike

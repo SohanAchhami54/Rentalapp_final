@@ -1,15 +1,18 @@
 import { useState } from 'react';
-import { assets, dummyUserData, ownerMenuLinks } from '../../assets/assets';
+import { assets} from '../../assets/assets';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useAppcontext } from '../../context/AppContext';
 import toast from 'react-hot-toast';
+import { MdDashboard } from "react-icons/md";
+import { RiMotorbikeFill } from "react-icons/ri";   
+import { IoMdAddCircle } from "react-icons/io"; 
+import { MdOutlineManageSearch } from "react-icons/md";
 
 const Sidebar = () => {
   const {user,axios,fetchUser } = useAppcontext();
   const location = useLocation();
   const [image, setImage] = useState('');
-
-
+  
   const updateImage = async () => {  //for updating the image section.
      try {
       const formData=new FormData();
@@ -71,7 +74,29 @@ const Sidebar = () => {
 
       {/* Menu Items */}
       <div className='w-full flex flex-col gap-4 mt-4'>
-        {ownerMenuLinks.map((link, index) => {
+         <div className='flex flex-col mx-auto space-y-10'>
+
+         <NavLink to={'/owner'} end className={({isActive})=>`flex items-center gap-1 ${isActive ?'text-blue-500':'text-gray-600'}`}> 
+         <span ><MdDashboard /></span>
+         <h2  className='max-md:hidden' >Dashboard</h2>
+        </NavLink>
+
+        <NavLink to={'/owner/addbike'}  className={({isActive})=>`flex items-center gap-1 ${isActive ?'text-blue-500':'text-gray-600'}`}>
+         <span ><IoMdAddCircle /></span>
+         <h2  className='max-md:hidden'>Add Bike</h2>
+        </NavLink>
+
+        <NavLink to={'/owner/managebike'}  className={({isActive})=>`flex items-center gap-1 ${isActive ?'text-blue-500':'text-gray-600'}`}>
+          <span ><RiMotorbikeFill /></span>
+          <h2  className='max-md:hidden'>Manage Bike</h2>
+         </NavLink>
+         
+        <NavLink to={'/owner/managebook'}   className={({isActive})=>`flex items-center gap-1 ${isActive ?'text-blue-500':'text-gray-600'}`}>
+          <span ><MdOutlineManageSearch /></span>
+          <h2  className='max-md:hidden'>Manage Booking</h2>
+         </NavLink>
+        </div>
+        {/* {ownerMenuLinks.map((link, index) => {
           const isActive = link.path === location.pathname;
           return (
             <NavLink
@@ -90,7 +115,7 @@ const Sidebar = () => {
               <span className='max-md:hidden'>{link.name}</span>
             </NavLink>
           );
-        })}
+        })} */}
       </div>
     </div>
   );

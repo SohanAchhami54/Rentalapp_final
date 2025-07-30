@@ -6,7 +6,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { useAppcontext } from '../../context/AppContext';
 import toast from 'react-hot-toast';
 
-const Managecar = () => {
+const Managebike = () => {
 const {isOwner,axios,currency}=useAppcontext();
 const [bike,setBike]=useState([]);
 
@@ -144,4 +144,4 @@ useEffect(()=>{  //whenver the component is loaded.
   )
 }
 
-export default Managecar
+export default Managebike

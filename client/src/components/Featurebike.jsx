@@ -1,14 +1,14 @@
 import Title from './Title'
-import CarCard from './CarCard'
+import BikeCard from './BikeCard'
 import { dummyCarData } from '../assets/assets'
 import { Button } from '../shadcnui/button'
 import { useNavigate } from 'react-router-dom'
 import { useAppcontext } from '../context/AppContext'
-const Featurecar = () => {
+const Featurebike = () => {
     const  navigate=useNavigate();
 
     const  {bike,user}=useAppcontext();//to display the bike information
-  return (
+     return (
     <>
        <div className='flex flex-col items-center py-24 px-6 md:px-16 lg:px-24'>
         {/* this is for title of the page */}
@@ -22,7 +22,7 @@ const Featurecar = () => {
            bike.slice(0, 6).map((bikeDetails) => (
            <li key={bikeDetails._id}>
             {/* this is car card  */}
-              <CarCard car={bikeDetails}  isHost={user?.usertype==='host'} />
+              <BikeCard bike={bikeDetails}  isHost={user?.usertype==='host'} />
            </li>
           ))
         ) : (
@@ -44,4 +44,4 @@ const Featurecar = () => {
   )
 }
 
-export default Featurecar
+export default Featurebike
