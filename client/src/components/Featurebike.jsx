@@ -1,6 +1,5 @@
 import Title from './Title'
 import BikeCard from './BikeCard'
-import { dummyCarData } from '../assets/assets'
 import { Button } from '../shadcnui/button'
 import { useNavigate } from 'react-router-dom'
 import { useAppcontext } from '../context/AppContext'

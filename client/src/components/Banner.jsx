@@ -1,5 +1,4 @@
 //this page is also for the home page banner
-import React from 'react'
 import { assets } from '../assets/assets'
 import { Button } from '../shadcnui/button'
 import { useNavigate } from 'react-router-dom'

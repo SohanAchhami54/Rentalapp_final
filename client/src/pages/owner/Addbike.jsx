@@ -18,7 +18,6 @@ const Addbike = () => {
     category:'',
     transmission:'',
     fuel_type:'',
-    seating_capacity:0,
     location:'',
     description:'',
   }) ;
@@ -46,7 +45,6 @@ const Addbike = () => {
          category:'',
          transmission:'',
          fuel_type:'',
-         seating_capacity:0,
          location:'',
          description:'',
              })
@@ -171,12 +169,7 @@ const Addbike = () => {
                     </div>
 
 
-                      <div className='flex flex-col w-full'>
-                      <label htmlFor="capacity">Seating Capacity:</label>
-                      <Input type='number' id='capacity' placeholder='100' value={bike.seating_capacity}
-                           onChange={(e)=>setBike({...bike, seating_capacity:e.target.value})}
-                      className='' />
-                  </div>
+
 
 
 

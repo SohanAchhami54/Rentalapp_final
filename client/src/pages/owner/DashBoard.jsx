@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { assets } from '../../assets/assets';
+// import { assets } from '../../assets/assets';
 import Title from './Title';
 import { useAppcontext } from '../../context/AppContext';
 import toast from 'react-hot-toast';
@@ -16,10 +16,10 @@ const DashBoard = () => {
   });
 
   const dashboardCards=[
-     {title:'Total Cars',value:data.totalbikes,icon:assets.carIconColored},
-     {title:'Total Bookings',value:data.totalbooking,icon:assets.listIconColored},
-     {title:'Pending',value:data.pendingbooking,icon:assets.cautionIconColored},
-     {title:'Confirmed',value:data.completebooking,icon:assets.listIconColored},
+     {title:'Total Bikes',value:data.totalbikes},
+     {title:'Total Bookings',value:data.totalbooking},
+     {title:'Pending',value:data.pendingbooking},
+     {title:'Confirmed',value:data.completebooking},
   ]
 
   const fetchDashboardData=async()=>{
@@ -54,11 +54,11 @@ const DashBoard = () => {
               {/* this is for title and value section  */}
               <div>
                  <h1>{curElem.title}</h1>
-                <h2>{curElem.value} </h2>
+                 <h2>{curElem.value} </h2>
               </div>
               {/* this is for icon section */}
                 <div className='mt-1'>
-                    <img src={curElem.icon} alt="" />
+                    {/* <img src={curElem.icon} alt="" /> */}
                 </div>
             </li>
           })
@@ -80,7 +80,7 @@ const DashBoard = () => {
                               <div className='flex items-center  gap-2'>
 
                                   <div className='hidden md:flex items-center justify-center'>
-                                  <img src={assets.listIconColored} alt="" className='h-5 w-5' />
+                                  {/* <img src={assets.listIconColored} alt="" className='h-5 w-5' /> */}
                                 </div>
 
                                 <div>

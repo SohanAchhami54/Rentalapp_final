@@ -96,26 +96,7 @@ const Sidebar = () => {
           <h2  className='max-md:hidden'>Manage Booking</h2>
          </NavLink>
         </div>
-        {/* {ownerMenuLinks.map((link, index) => {
-          const isActive = link.path === location.pathname;
-          return (
-            <NavLink
-              key={index}
-              to={link.path}
-              className={`flex mx-1 gap-2 py-2 px-4 rounded ${
-                isActive
-                  ? 'bg-blue-100 text-blue-500'
-                  : 'bg-gray-300 text-gray-600'
-              }`}
-            >
-              <img
-                src={isActive ? link.coloredIcon : link.icon}
-                alt="menu icon"
-              />
-              <span className='max-md:hidden'>{link.name}</span>
-            </NavLink>
-          );
-        })} */}
+    
       </div>
     </div>
   );

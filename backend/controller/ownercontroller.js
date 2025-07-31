@@ -84,7 +84,7 @@ res.json({success:true,message:'bike added'});
 //       "category": "sport",
 //       "transmission": "manual",
 //       "fuel_type": "petrol",
-//       "seating_capacity": 2,
+//    
 //       "location": "Kathmandu",
 //       "description": "Well maintained, great for rides."
 //     }`
@@ -191,7 +191,7 @@ exports.deletebike=async(req,res)=>{
 
 exports.getDashboardData=async(req,res)=>{
     try {
-        const {_id,usertype}=req.user;
+        const {_id,usertype}=req.user; 
         // if(usertype!=='host'){
         //     return res.json({success:false,message:'Unauthorized'});
         // }
@@ -205,7 +205,7 @@ exports.getDashboardData=async(req,res)=>{
 
         //calculate monthly revenue from booking where status is confirmed
       const monthlyRevenue=booking.slice().filter(booking=>booking.status==='confirmed').reduce((acc,booking)=>{
-       return acc+booking.price
+        return acc+booking.price
         },0);
 
         const dashboardData={

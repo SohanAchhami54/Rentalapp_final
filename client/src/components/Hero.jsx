@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { IoMdSearch } from "react-icons/io";
 import { Button } from "../shadcnui/button"
 import {assets} from '../assets/assets'

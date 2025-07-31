@@ -1,6 +1,8 @@
 //this is car component and this page show all the car details  
 import { useNavigate } from "react-router-dom";
-import { assets } from "../assets/assets";
+import { RiMotorbikeLine } from "react-icons/ri";
+import { MdOutlineLocationOn } from "react-icons/md";
+import { BsFuelPump } from "react-icons/bs";
 import { useAppcontext } from "../context/AppContext";
 const BikeCard = ({bike,isHost=false}) => {
  const {currency}=useAppcontext();
@@ -28,31 +30,28 @@ const BikeCard = ({bike,isHost=false}) => {
             </div>
         </div>
         {/* this is for details */}
-        <div className="p-4 sm:p-5 ">
+        <div className="p-4 sm:p-8 ">
             {/* this is for car name */}
             <div>
             <h3 className="text-lg font-medium">{bike.brand} {bike.model} </h3>
             <p>{bike.category} {bike.year}</p>
            </div>
            <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2 items-center h-20 text-gray-600">
-                 <div className="flex items-center text-sm gap-1">  
-                    {/* user icon */}
-                    <img src={assets.users_icon}  alt="" className="h-4 " />
-                    <span className="text-xs sm:text-sm">{bike.seating_capacity} </span>
-                 </div>
                     {/* fuel icon */}
-                   <div className="flex items-center text-sm  gap-1">  
-                    <img src={assets.fuel_icon}  alt="" className="h-4 " />
+                   <div className="flex items-center text-sm  gap-2">  
+                    <BsFuelPump className="text-xl" />
+
                     <span className="text-xs sm:text-sm">{bike.fuel_type} </span>
                  </div>
                    {/* this is for car icon */}
-                   <div className="flex items-center text-sm  gap-1">  
-                    <img src={assets.car_icon}  alt="" className="h-4 " />
+                   <div className="flex items-center text-sm  gap-2">  
+                    <RiMotorbikeLine  className="text-xl" />
                     <span  className="text-xs sm:text-sm">{bike.transmission} </span>
                  </div>
                    {/* this is for location  */}
-                   <div className="flex items-center text-sm  gap-1">  
-                    <img src={assets.location_icon}  alt="" className="h-4 " />
+                   <div className="flex items-center text-sm  gap-2">  
+
+                    <MdOutlineLocationOn className="text-xl" />
                     <span className="text-xs sm:text-sm">{bike.location} </span>
                  </div>
            </div>

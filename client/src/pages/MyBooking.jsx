@@ -1,6 +1,5 @@
 //this is for the booking data.
 import { useEffect, useState } from "react"
-import { assets} from "../assets/assets";
 import Title from "../components/Title";
 import { useAppcontext } from "../context/AppContext";
 import toast from "react-hot-toast";
@@ -59,8 +58,8 @@ const fetchMyBookings=async()=>{
                       </div>
                       {/* this is for pickup date  */}
                       <div className="flex items-start gap-2 mt-2">
-                           <img src={assets.calendar_icon_colored} alt="calender" 
-                             className="w-4 h-4 mt-1"/>
+                           {/* <img src={assets.calendar_icon_colored} alt="calender" 
+                             className="w-4 h-4 mt-1"/> */}
                              {/* this is for rental period */}
                              <div>
                               <p className="text-gray-500">Rental Period</p>
@@ -71,8 +70,8 @@ const fetchMyBookings=async()=>{
                       </div>
                          {/* this is for the return location */}
                         <div className="flex items-start gap-2 mt-2">
-                           <img src={assets.location_icon_colored} alt="calender" 
-                             className="w-4 h-4 mt-1"/>
+                           {/* <img src={assets.location_icon_colored} alt="calender" 
+                             className="w-4 h-4 mt-1"/> */}
                              {/* this is for rental period */}
                              <div>
                               <p className="text-gray-500">Pickup Location</p>

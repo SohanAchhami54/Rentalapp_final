@@ -1,8 +1,11 @@
 import  { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { assets, dummyCarData } from "../assets/assets";
+// import { assets } from "../assets/assets";
 import { Button } from "../shadcnui/button";
 import { useAppcontext } from "../context/AppContext";
+import { RiMotorbikeLine } from "react-icons/ri";
+import { BsFuelPump } from "react-icons/bs";
+import { MdOutlineLocationOn } from "react-icons/md";
 import toast from "react-hot-toast";
 const BikeDetails = () => {
   const { id } = useParams(); //it takes the id of particular page //{id: '67ff6b758f1b3684286a2a65'}
@@ -72,8 +75,20 @@ const BikeDetails = () => {
               </div>
               <hr className="my-6" />
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                {[
-                  { icon: assets.users_icon, text: `${bikes.seating_capacity}` },
+                <div className="flex flex-col items-center">
+                  <BsFuelPump className="text-xl" />
+                   <p>{bikes.fuel_type} </p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <RiMotorbikeLine className="text-xl" />
+                   <p>{bikes.transmission} </p>
+                </div>
+                <div className="flex flex-col items-center">
+                 <MdOutlineLocationOn className="text-xl" />
+                   <p>{bikes.location} </p>
+                </div>
+                {/* {[
+                  
                   { icon: assets.fuel_icon, text: bikes.fuel_type },
                   { icon: assets.car_icon, text: bikes.transmission },
                   { icon: assets.location_icon, text:  bikes.location },
@@ -82,11 +97,11 @@ const BikeDetails = () => {
                     key={text}
                     className="flex flex-col items-center p-4 bg-light rounded-lg"
                   >
-                    {/* for the image of assets  */}
+                   
                     <img src={icon} alt="" className="h-5 mb-3" />
                     <p>{text} </p>
                   </div>
-                ))}
+                ))} */}
               </div>
             </div>
        {/* description */}
@@ -100,10 +115,10 @@ const BikeDetails = () => {
               <h1 className="text-xl font-medium m-3">Features</h1>
                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {
-                      ['Blutooth','GPS',
-                        'Rear view Mirror'].map((item)=>{
+                      ['Adjustable suspension','ABS',
+                        'Durable wheels'].map((item)=>{
                           return <li key={item} className="flex items-center ">
-                             <img src={assets.check_icon} className="h-4 mr-2" alt="" />
+                             {/* <img src={assets.check_icon} className="h-4 mr-2" alt="" /> */}
                               {item}
                           </li>
                         })

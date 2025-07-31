@@ -7,7 +7,6 @@ const bikeSchema=mongoose.Schema({
      image:{type:String,  required:true,},
      year:{ type:String,  required:true,},
      category:{ type:String, required:true,},
-     seating_capacity:{ type:Number,required:true, },
      fuel_type:{ type:String,required:true },
      transmission:{type:String, required:true, },
      pricePerDay:{  type:Number, required:true,},
