@@ -1,4 +1,4 @@
-//this is car component and this page show all the car details  
+//this is bike component and this page show all the bike details  
 import { useNavigate } from "react-router-dom";
 import { RiMotorbikeLine } from "react-icons/ri";
 import { MdOutlineLocationOn } from "react-icons/md";
@@ -14,14 +14,14 @@ const BikeCard = ({bike,isHost=false}) => {
  }
   return (
    <>
-     {/* this function is used to go to the individual webpage of each car */}
-     {/* <div onClick={()=>{navigate(`/bikedetail/${car._id}`);scrollTo(0,0)}} */}
+     {/* this function is used to go to the individual webpage of each bike */}
+     {/* <div onClick={()=>{navigate(`/bikedetail/${bike._id}`);scrollTo(0,0)}} */}
        <div onClick={handleClick}
       className='group rounded-xl overflow-hidden shadow-lg   transition-all duration-500
       cursor-pointe hover:translate-y-2 cursor-pointer'>
         {/* this is for image */}
         <div className='relative h-50 w-full overflow-hidden'>
-            <img src={bike.image} alt="car image" className='w-full h-full object-cover transition-all duration-500 ease   hover:scale-105' />
+            <img src={bike.image} alt="bike image" className='w-full h-full object-cover transition-all duration-500 ease   hover:scale-105' />
             {bike.isAvailable&& <p className='absolute top-4 left-4 bg-blue-600 text-white text-xs
             px-2.5 py-1 rounded-full'>Available now</p>}
             <div className='absolute bottom-4 right-4 bg-black text-white px-3 py-2 rounded-lg'>
@@ -31,7 +31,7 @@ const BikeCard = ({bike,isHost=false}) => {
         </div>
         {/* this is for details */}
         <div className="p-4 sm:p-8 ">
-            {/* this is for car name */}
+            {/* this is for bike name */}
             <div>
             <h3 className="text-lg font-medium">{bike.brand} {bike.model} </h3>
             <p>{bike.category} {bike.year}</p>
@@ -43,7 +43,7 @@ const BikeCard = ({bike,isHost=false}) => {
 
                     <span className="text-xs sm:text-sm">{bike.fuel_type} </span>
                  </div>
-                   {/* this is for car icon */}
+                   {/* this is for bike icon */}
                    <div className="flex items-center text-sm  gap-2">  
                     <RiMotorbikeLine  className="text-xl" />
                     <span  className="text-xs sm:text-sm">{bike.transmission} </span>

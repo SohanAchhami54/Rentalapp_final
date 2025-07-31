@@ -14,13 +14,13 @@ const Featurebike = () => {
          <div>
             <Title title='Features Vehicles' subTitle='Explore a Wide Range of Vehicles and Choose the Perfect Ride for Every Journey' />
          </div>
-         {/* this is for car components */}
+         {/* this is for bike components */}
           <div>
            <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mt-10'>
            {bike && bike.length > 0 ? (
            bike.slice(0, 6).map((bikeDetails) => (
            <li key={bikeDetails._id}>
-            {/* this is car card  */}
+            {/* this is bike card  */}
               <BikeCard bike={bikeDetails}  isHost={user?.usertype==='host'} />
            </li>
           ))
@@ -29,7 +29,7 @@ const Featurebike = () => {
         )}
 
            </ul>
-           {/* this is explore all car  */}
+           {/* this is explore all bike  */}
               <div className=' flex items-center justify-center m-10 '>
                 {/* . This is commonly used when navigating between pages or routes in a Single-Page Application (SPA) to ensure the new page loads at the top, preventing the user from remaining at the previous scroll position.  use of scrollTo */}
                    <Button onClick={()=>{navigate('/bike');scrollTo(0,0)}} 

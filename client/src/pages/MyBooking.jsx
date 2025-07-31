@@ -40,11 +40,11 @@ const fetchMyBookings=async()=>{
             // four oota grid ma convert gardeko xu 
             return <li key={booking._id}className="grid grid-cols-1 md:grid-cols-4 gap-6 p-6 rounded-lg
             border border-gray-400 mt-5">
-              {/* car image + info */}
+              {/* bike image + info */}
                {/* <div className=""> */}
                 <div className="">
                   {/* The aspect-video class in Tailwind CSS sets an element's aspect ratio to 16:9, commonly used for videos. */}
-                   <img src={booking.bike.image} alt="booking car" className="w-full h-auto aspect-video object-cover"/>
+                   <img src={booking.bike.image} alt="booking bike" className="w-full h-auto aspect-video object-cover"/>
                      <p className="text-lg font-medium mt-2">{booking.bike.brand } {booking.bike.model} </p>
                      <p className="text-gray-500">{booking.bike.year}.{booking.bike.category}.{booking.bike.location} </p>
                 </div>

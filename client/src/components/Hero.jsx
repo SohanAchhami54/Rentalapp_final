@@ -49,7 +49,7 @@ const Hero = () => {
                     variant="outline">Search<IoMdSearch /> </Button>
              </div>
          </form> */}
-          {/* <img src={assets.main_car}  alt="car" className='max-h-74' /> */}
+          
           <div className='grid grid-cols-1  justify-center items-center'>
           {/* <img src={assets.yamahaBike22} alt='bike1' className='max-h-80' /> */}
           {/* <img src={assets.heroBike} alt='bike2' className='max-h-80' /> */}

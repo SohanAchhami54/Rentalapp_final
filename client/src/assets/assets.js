@@ -13,7 +13,6 @@ export const assets = {
     check_icon,
     upload_icon,
     user_profile,
-
     homebike,
     yamahaBike22,
     heroBike,

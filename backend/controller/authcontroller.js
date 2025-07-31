@@ -80,7 +80,7 @@
     }
 
 
-//get all cars for the frontend
+//get all bikes for the frontend
 exports.getBikes=async(req,res)=>{
     try {
         const bikes=await Bike.find({isAvailable:true});

@@ -77,7 +77,7 @@ const Managebooking = () => {
                               
                               {/* first table data  */}
                              <td className='p-3 flex items-center gap-3'>
-                                  <img src={booking.bike.image} alt="carimage" 
+                                  <img src={booking.bike.image} alt="bikeimage" 
                                   className='h-12 w-12 aspect-square object-cover rounded-md'
                                   />
                                   {/* yeslai pani hidden gardiney mobile screen ma */}

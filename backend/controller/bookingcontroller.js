@@ -1,4 +1,4 @@
-//function to check the availability of the car for a given date
+//function to check the availability of the bike for a given date
 const Bike = require('../models/bike');
 const Booking=require('../models/booking');
 const ownerRouter = require('../routes/ownerRouter');
@@ -14,7 +14,7 @@ exports.checkAvailability=async(bike,pickupDate,returnDate)=>{
 
 
 // //for the home page data
-// //api to check the availability of car for the given date and location 
+// //api to check the availability of bike for the given date and location 
 // exports.checkAvailbilityOfBike=async(req,res)=>{
 //     try {
 //        const {location,pickupDate,returnDate}=req.body;
@@ -40,8 +40,8 @@ exports.checkAvailability=async(bike,pickupDate,returnDate)=>{
 // }
 
 
-//for booking the car
-exports.createBooking=async(req,res)=>{//for booking we need the use id and car details
+//for booking the bike
+exports.createBooking=async(req,res)=>{//for booking we need the use id and bike details
     try {
        const {_id}=req.user;//req.user contains info about the logged-in user (like ID, name, email). 
        console.log('req.user:',req.user);
@@ -50,7 +50,7 @@ exports.createBooking=async(req,res)=>{//for booking we need the use id and car 
        const isAvailable=await this.checkAvailability(bikeId, pickupDate,returnDate);
 
        if(!isAvailable){
-        return res.json({success:false,message:'car is not available'});
+        return res.json({success:false,message:'bike is not available'});
        }
 
        //if the bike is ava ilable

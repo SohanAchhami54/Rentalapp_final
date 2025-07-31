@@ -16,7 +16,7 @@ exports.changeRoletoOwner=async(req,res)=>{  //this is changeroletoowner.
 }   
 
 
-//api to list the car
+//api to list the bike
 exports.postAddBike=async(req,res)=>{
   try {
      const{_id}=req.user; //kun host ley upload gareko ho tyo hunxa.
@@ -177,7 +177,7 @@ exports.deletebike=async(req,res)=>{
         }
          await Bike.findByIdAndDelete(bikeId);
         //   bike.owner=null;
-        //   car.isAvailable=false;
+        //   bike.isAvailable=false;
         //   await bike.save();
           res.json({success:true,message:'Bike removed'});
         } catch (error) {

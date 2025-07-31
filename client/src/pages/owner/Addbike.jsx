@@ -62,7 +62,7 @@ const Addbike = () => {
   return (
     <>
          <div className='px-4 py-10 md:px-10   '>
-          <Title title='Add new Bike here' subTitle='List your car and the real money.' />
+          <Title title='Add new Bike here' subTitle='List your bike and the real money.' />
            <form action="" onSubmit={handleSubmit} className='mt-6 flex flex-col space-y-8'>
                 {/* this is for the bike image  */}
 
@@ -79,7 +79,7 @@ const Addbike = () => {
                    onChange={(e)=>setImage(e.target.files[0])}
                   hidden/>
                 </label>
-                {/* upload car */}
+                {/* upload bike */}
                 <p className='text-sm text-gray-500'>Upload the picture of your Bike</p>
                 </div>
 

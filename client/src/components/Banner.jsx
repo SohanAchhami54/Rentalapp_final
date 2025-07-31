@@ -27,5 +27,4 @@ const Banner = () => {
     </>
   )
 }
- {/* <img src={assets.banner_car_image} alt="" /> */}
 export default Banner

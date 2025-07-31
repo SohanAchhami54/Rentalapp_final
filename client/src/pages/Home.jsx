@@ -1,5 +1,5 @@
 import Banner from "../components/Banner"
-import Featurecar from "../components/Featurebike"
+import Featurebike from "../components/Featurebike"
 import Hero from "../components/Hero"
 import { AnimatedTestimonialsDemo } from "../components/Testimonial"
 
@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div>
       <Hero/>
-      <Featurecar/>
+      <Featurebike/>
       <Banner/>
       <AnimatedTestimonialsDemo/>
     </div>

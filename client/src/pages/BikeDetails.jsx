@@ -13,7 +13,7 @@ const BikeDetails = () => {
   const {bike,axios,currency,pickupDate,setPickupDate,returnDate,setReturnDate}=useAppcontext();
   const [bikes, setBikes] = useState(null);
  
-  // console.log(car);
+  // console.log(bike);
 
  //to handle the form details
  const handleSubmit=async(e)=>{
@@ -33,16 +33,16 @@ const BikeDetails = () => {
 
   useEffect(() => {
     //when the id changes it display the value of that particular id.
-     setBikes(bike.find((bike) => bike._id === id));  //useAppContext bata aayeko car ho yo.
+     setBikes(bike.find((bike) => bike._id === id));  //useAppContext bata aayeko bike ho yo.
   }, [bike, id]);
 
 
   
   return bikes ? (
     <>
-      {/* this is the individual car details */}
+      {/* this is the individual bike details */}
       <div className="px-6 md:px-16 lg:px-24  xl:px-32 mt-16">
-        {/* //jun page bata car ko details lai click gareko ho 
+        {/* //jun page bata bike ko details lai click gareko ho 
       // yo button click garisakey paxi paila kai page ma aai puginxa. */}
         <Button
           onClick={() => {navigate(-1);scrollTo(0,0)}}
@@ -51,10 +51,10 @@ const BikeDetails = () => {
           Back to all Bikes
         </Button>
       
-       {/* this line seperate the new left side and right side of the cardetails page */}
+       {/* this line seperate the new left side and right side of the bikedetails page */}
 
         <div className=" grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-          {/* this is the left car image */}
+          {/* this is the left bike image */}
           <div className="lg:col-span-2">
             <img
               src={bikes.image}
@@ -68,7 +68,7 @@ const BikeDetails = () => {
                   {bikes.brand}
                   {bikes.model}{" "}
                 </h1>
-                {/* car model and year */}
+                {/* bike model and year */}
                 <p className="text-lg">
                   {bikes.category} . {bikes .year}{" "}
                 </p>
@@ -87,21 +87,6 @@ const BikeDetails = () => {
                  <MdOutlineLocationOn className="text-xl" />
                    <p>{bikes.location} </p>
                 </div>
-                {/* {[
-                  
-                  { icon: assets.fuel_icon, text: bikes.fuel_type },
-                  { icon: assets.car_icon, text: bikes.transmission },
-                  { icon: assets.location_icon, text:  bikes.location },
-                ].map(({ icon, text }) => (
-                  <div
-                    key={text}
-                    className="flex flex-col items-center p-4 bg-light rounded-lg"
-                  >
-                   
-                    <img src={icon} alt="" className="h-5 mb-3" />
-                    <p>{text} </p>
-                  </div>
-                ))} */}
               </div>
             </div>
        {/* description */}
@@ -128,7 +113,7 @@ const BikeDetails = () => {
           </div>
 
 
-          {/* this is for the right car image */}
+          {/* this is for the right bike image */}
          <form action="" onSubmit={handleSubmit}
           className="h-max sticky top-18 p-6 shadow-xl rounded-lg">
               <p className="text-xl font-bold flex items-center justify-between ">
