@@ -1,7 +1,7 @@
 import check_icon from "./check_icon.svg" //
 import user_profile from "./user_profile.png"
 import upload_icon from "./upload_icon.svg"// 
-
+import edit_icon from "./edit_icon.svg"
 //bike image
 import homebike from './homebike2.jpg'//
 import yamahaBike22 from './yamahabike22.webp';
@@ -16,6 +16,7 @@ export const assets = {
     homebike,
     yamahaBike22,
     heroBike,
-    ducatiBike  
+    ducatiBike ,
+    edit_icon
 }
 

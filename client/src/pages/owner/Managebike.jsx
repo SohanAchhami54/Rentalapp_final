@@ -7,7 +7,7 @@ import { useAppcontext } from '../../context/AppContext';
 import toast from 'react-hot-toast';
 
 const Managebike = () => {
-const {isOwner,axios,currency}=useAppcontext();
+const {axios,currency}=useAppcontext();
 const [bike,setBike]=useState([]);
 
 const fetchOwnerBikes=async()=>{
@@ -60,7 +60,7 @@ useEffect(()=>{  //whenver the component is loaded.
   return (
     <>
       <div className='px-4 pt-10 md:px-10 w-full'>
-         <Title title='Manage Bike' subTitle='View all the bike, update their details,or remove them from the booking platform. ' />
+         <Title title='Manage Bike' subTitle='View all the bike, update the details,or remove them from the booking platform. ' />
          {/* for the table  */}
          <div className=' border mt-6 rounded-lg  w-full max-w-5xl '>
           <table className='w-full text-left text-sm  text-gray-500'>

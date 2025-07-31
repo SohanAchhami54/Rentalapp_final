@@ -2,9 +2,20 @@
 import { assets } from '../assets/assets'
 import { Button } from '../shadcnui/button'
 import { useNavigate } from 'react-router-dom'
+import { useAppcontext } from '../context/AppContext'
+import { toast } from 'react-hot-toast';
 
 const Banner = () => {
     const navigate=useNavigate();
+    const {user}=useAppcontext();
+    const handleClick=()=>{
+      if(user?.usertype==='host'){
+        navigate('/owner/addbike');
+        window.scrollTo({top:0,behavior:'smooth'})
+      }else{
+        toast.error('Only host can list the bike')
+      }
+    }
   return (
     <>
     <div className='flex flex-col   gap-8  justify-between items-center md:flex-row   shadow-2xl  py-10 px-10 
@@ -15,8 +26,13 @@ const Banner = () => {
          <p>We take care of insurance,driver certification and secure payments-
             so you can earn passive income,stress-free
          </p>
-         <Button onClick={()=>{navigate('/bike')}}
-          className='w-30 bg-black text-white'>List your Bike</Button>
+        <Button 
+          onClick={handleClick} 
+          className={`w-30 bg-black text-white hover:cursor-pointer`} 
+         
+        >
+          List your Bikes
+          </Button>
          
        </div>
        <div className='sm:w-[250px] sm:h-[250px] md:w-[300px] md:h-[300px] overflow-hidden rounded-full'>

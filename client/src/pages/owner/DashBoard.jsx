@@ -5,7 +5,7 @@ import { useAppcontext } from '../../context/AppContext';
 import toast from 'react-hot-toast';
 
 const DashBoard = () => {
-  const {axios,isOwner,currency}=useAppcontext();
+  const {axios,currency}=useAppcontext();
   const [data,setData]=useState({
     totalbikes:0,
     totalbooking:0,
@@ -35,9 +35,9 @@ const DashBoard = () => {
         }
   }
   useEffect(()=>{  //when this component gets load for the first time.
-    //  if(isOwner){
+
        fetchDashboardData();
-    //  }
+   
   },[]);
 
 

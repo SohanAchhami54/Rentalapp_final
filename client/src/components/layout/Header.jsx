@@ -6,15 +6,14 @@ import { Button } from "../../shadcnui/button";
 import { useAppcontext } from "../../context/AppContext";
 
 const Header = () => {
-  const { setShowLogin, user, logout, isOwner, axios, setIsOwner } = useAppcontext();
+  const { setShowLogin, user, logout, axios } = useAppcontext();
   const navigate=useNavigate();
   const [open, setOpen] = useState(false);
 
-  const isOwnerPath = useLocation().pathname.startsWith('/owner');
-
+ 
   return (
     <header className="bg-neutral-200">
-      {/* {!isOwnerPath && */}
+     
         <nav className='flex justify-between px-2 md:justify-around p-3 font-medium'>
           <h1 className="text-2xl font-medium"><NavLink to='/'>RentalApp</NavLink></h1>
 

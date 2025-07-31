@@ -1,5 +1,4 @@
   import { createContext, useContext, useEffect, useState } from "react";
-  import {useNavigate} from 'react-router-dom'
   import axios from 'axios';
   import {toast} from 'react-hot-toast';
 
@@ -8,15 +7,15 @@
   const AppContext=createContext();
   export const AppProvider=({children})=>{
       console.log('App Provider is mounted');
-      //const navigate=useNavigate();
       const currency=import.meta.env.VITE_CURRENCY;
       const [token,setToken]=useState(null);
       const [user,setUser]=useState('');
-      const [isOwner,setIsOwner]=useState(false);
+  
       const [showLogin,setShowLogin]=useState(false);
       const [pickupDate, setPickupDate] = useState('');
       const [returnDate,setReturnDate]=useState('');
       const [bike,setBike]=useState([]);
+      const [loadingUser,setLoadingUser]=useState(true);
 
       //function to check if the user is loggedin
       const fetchUser=async()=>{
@@ -25,7 +24,7 @@
           if(data.success){
               console.log(data);
               setUser(data.user);
-              setIsOwner(data.user.usertype==='host')
+             
           }else{
               //navigate('/');
               localStorage.removeItem('token');
@@ -34,6 +33,8 @@
         
           } catch (error) {
               toast.error(error.message);
+          }finally{
+            setLoadingUser(false)
           }
       }
 
@@ -54,7 +55,7 @@
       localStorage.removeItem('token')
       setToken(null);
       setUser(null);
-      setIsOwner(false);
+
       axios.defaults.headers.common['Authorization']='';
       toast.success('You have been logout')
   }
@@ -66,11 +67,6 @@
         setToken(token);
         fetchBikes();
     },[]);
-
-
-
-
-
 
   //useeffect to fetch the user data when the token is available
     useEffect(()=>{
@@ -84,8 +80,9 @@
     }
     },[token])
       const value={
-      currency,axios,user,setUser,token,setToken,isOwner,setIsOwner,fetchUser,showLogin,
-        setShowLogin,logout,fetchBikes,bike,setBike,pickupDate,setPickupDate,returnDate,setReturnDate
+      currency,axios,user,setUser,token,setToken,fetchUser,showLogin,
+        setShowLogin,logout,fetchBikes,bike,setBike,pickupDate,setPickupDate,returnDate,setReturnDate,
+        loadingUser
       }
       return(
           <>

@@ -1,19 +1,34 @@
-import React from 'react'
-import { useAppcontext } from '../context/AppContext'
+// import { useAppcontext } from '../context/AppContext'
+// import { Navigate, Outlet } from 'react-router-dom';
+
+// const ProtectedRoute = () => {
+//   const {user}=useAppcontext();
+
+//   return (
+//     <>
+//       <div>
+//          { user? <Outlet/>:<Navigate to='/login'/>}
+//       </div>
+//     </>
+//   )
+// }
+
+import { useAppcontext } from '../context/AppContext';
 import { Navigate, Outlet } from 'react-router-dom';
 
-const ProtectedRoute = () => {
-  const {user}=useAppcontext();
+const ProtectedRoute = ({ allowedUsertype }) => {
+  const { user } = useAppcontext();
 
-  return (
-    <>
-      <div>
-         { user? <Outlet/>:<Navigate to='/login'/>}
-      </div>
-    </>
-  )
-}
+   if(user===undefined) return null;
 
-export default ProtectedRoute
+    if (!user) return <Navigate to="/login" replace />;
+// for both type of user that is host and guest for !allowedUsertype
+  // if (!allowedUsertype || user.usertype === allowedUsertype) {
+  if(user.usertype===allowedUsertype){
+    return <Outlet />;  
+  }
 
+  return <Navigate to="/" replace />;
+};
 
+export default ProtectedRoute;
