@@ -47,18 +47,25 @@
 //           path:'/signup',
 //           element:<Signup/>
 //         },
-
-
+//        {
+//          element:<ProtectedRoute allowedUsertype="guest"/>,
+//           children:[
+             
 //          {
 //           path:'/mybooking',
 //            element: (
-        
 //              <MyBooking />
-     
-//         )
+//              )
 
 //         },
-//         {
+//         ]
+//        },
+     
+      
+//        {
+//         element:<ProtectedRoute allowedUsertype="host" />,
+//         children:[
+//               {
 //           path:'/owner',
 //             element: (
        
@@ -85,6 +92,11 @@
 //             },
 //           ]
 //         },
+//         ]
+//        },
+
+
+       
      
 //       ]
 //     }

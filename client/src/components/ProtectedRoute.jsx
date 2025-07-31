@@ -13,22 +13,42 @@
 //   )
 // }
 
+// import { useAppcontext } from '../context/AppContext';
+// import { Navigate, Outlet } from 'react-router-dom';
+
+// const ProtectedRoute = ({ allowedUsertype }) => {
+//   const { user } = useAppcontext();
+
+//    if(user===undefined) return null;
+
+//     if (!user) return <Navigate to="/login" replace />;
+// // for both type of user that is host and guest for !allowedUsertype
+//   // if (!allowedUsertype || user.usertype === allowedUsertype) {
+//   if(user.usertype===allowedUsertype){
+//     return <Outlet />;  
+//   }
+
+//   return <Navigate to="/" replace />;
+// };
+
+// export default ProtectedRoute;
 import { useAppcontext } from '../context/AppContext';
 import { Navigate, Outlet } from 'react-router-dom';
 
 const ProtectedRoute = ({ allowedUsertype }) => {
-  const { user } = useAppcontext();
+  const { user, isLogged } = useAppcontext();
 
-   if(user===undefined) return null;
+  if (!isLogged) {
+    return <Navigate to="/login" replace />;
+  }
 
-    if (!user) return <Navigate to="/login" replace />;
-// for both type of user that is host and guest for !allowedUsertype
-  // if (!allowedUsertype || user.usertype === allowedUsertype) {
-  if(user.usertype===allowedUsertype){
-    return <Outlet />;  
+  if (user && user.usertype === allowedUsertype) {
+    return <Outlet />;
   }
 
   return <Navigate to="/" replace />;
 };
 
 export default ProtectedRoute;
+
+

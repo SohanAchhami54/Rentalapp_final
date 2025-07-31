@@ -28,8 +28,8 @@
             await user.save();
             //jwt token
             //aafai generate gardinxa
-            const token=generateToken(user._id.toString()); //send the token to the frontend
-            res.json({success:true,token});
+            // const token=generateToken(user._id.toString()); //send the token to the frontend
+            // res.json({success:true,token});
            
 
         } catch (err) {

@@ -1,7 +1,7 @@
 import  { useEffect, useState } from 'react'
 import Title from './Title';
 import { useAppcontext } from '../../context/AppContext';
-
+import toast from 'react-hot-toast';
 const Managebooking = () => {
   const {axios,currency}=useAppcontext();
   const [bookings,setBookings]=useState([]);//to store the booking data.
@@ -21,20 +21,26 @@ const Managebooking = () => {
 
 
   //to check the changeBookingStatus
- const changeBookingStatus=async(bookingId,status)=>{
-  try {
-    const {data}=await axios.post('/api/booking/change-status',{bookingId,status});
-    if(data.success){
-      toast.success(data.message)
-      fetchOwnerBookings();
-    }else{
-      toast.error(data.message);
-    }
-  } catch (error) {
-    toast.error(error.message);
-  }
- }
- 
+ const changeBookingStatus = async (bookingId, status) => {
+		try {
+      // for the database 
+			const { data } = await axios.post("/api/booking/change-status", {
+				bookingId,
+				status,
+			});
+			if (data.success) {
+				toast.success(data.message);
+      //this is for frontend
+				setBookings((prev) =>
+					prev.map((b) => (b._id === bookingId ? { ...b, status } : b)),
+				);
+			} else {
+				toast.error(data.message);
+			}
+		} catch (error) {
+			toast.error(error.message);
+		}
+	};
 
 
 
@@ -108,23 +114,25 @@ const Managebooking = () => {
                               </td>
 
                               {/* fifth data  */}
-                              <td className='p-3 '>
-                                {booking.status==='pending'?(
-                                  <select onChange={(e)=> changeBookingStatus(booking._id,e.target.value)}
-                                   value={booking.status} className='px-2 py-1.5 mt-1 text-gray-500 border
-                                  rounded-md outline-none'>
-                                  <option value="pending">Pending</option>
-                                  <option value="cancelled">Cancel</option>
-                                  <option value="confirmed">Confirmed</option>
-                                  </select>
-                                ):(
-                                  <span className={`px-2 py-1 rounded-sm
-                                   ${booking.status==='confirmed'?'bg-green-300 ':'bg-red-300'} 
-                                    `}>{booking.status} </span>
-                                )}
+                            <td className="p-3 ">
+										   	<select
+                       onChange={(e) => changeBookingStatus(booking._id, e.target.value)}
+                       value={booking.status}
+                       className={`px-2 py-1.5 mt-1 text-gray-700 border rounded-md outline-none
+                         ${
+                           booking.status === "confirmed"
+                             ? "bg-green-200"
+                             : booking.status === "cancelled"
+                             ? "bg-red-200"
+                             : "bg-white"
+                         }`}
+                     >
+                           <option value="pending">Pending</option>
+                           <option value="cancelled">Cancelled</option>
+                           <option value="confirmed">Confirmed</option>
+                           </select>									</td>
 
-                              </td>
-                                      
+
                         </tr>
                       })
                     }

@@ -1,3 +1,4 @@
+
   import { createContext, useContext, useEffect, useState } from "react";
   import axios from 'axios';
   import {toast} from 'react-hot-toast';
@@ -10,7 +11,7 @@
       const currency=import.meta.env.VITE_CURRENCY;
       const [token,setToken]=useState(null);
       const [user,setUser]=useState('');
-  
+      const [isLogged,setIsLogged]=useState(false);
       const [showLogin,setShowLogin]=useState(false);
       const [pickupDate, setPickupDate] = useState('');
       const [returnDate,setReturnDate]=useState('');
@@ -55,7 +56,7 @@
       localStorage.removeItem('token')
       setToken(null);
       setUser(null);
-
+      setIsLogged(false);
       axios.defaults.headers.common['Authorization']='';
       toast.success('You have been logout')
   }
@@ -75,14 +76,18 @@
     if(token){ 
       // axios.defaults.headers.common['Authorization']=` ${token}`;
        axios.defaults.headers.common['Authorization'] = `${token}`;
-
+      setIsLogged(true);
       fetchUser();
+    }
+    else{
+      setIsLogged(false);
+      setLoadingUser(false)
     }
     },[token])
       const value={
       currency,axios,user,setUser,token,setToken,fetchUser,showLogin,
         setShowLogin,logout,fetchBikes,bike,setBike,pickupDate,setPickupDate,returnDate,setReturnDate,
-        loadingUser
+        loadingUser,isLogged
       }
       return(
           <>

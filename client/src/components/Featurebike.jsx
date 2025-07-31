@@ -9,7 +9,7 @@ const Featurebike = () => {
     const  {bike,user}=useAppcontext();//to display the bike information
      return (
     <>
-       <div className='flex flex-col items-center py-24 px-6 md:px-16 lg:px-24'>
+       <div className='flex flex-col items-center py-20 px-6 md:px-16 lg:px-24'>
         {/* this is for title of the page */}
          <div>
             <Title title='Features Vehicles' subTitle='Explore a Wide Range of Vehicles and Choose the Perfect Ride for Every Journey' />

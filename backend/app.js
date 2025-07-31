@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const {authRouter} = require('./routes/authRouter');
 const {ownerRouter} = require('./routes/ownerRouter');
 const {bookingRouter} = require('./routes/bookingRouter');
-
 const app = express();
 // Middleware
 app.use(express.json());
