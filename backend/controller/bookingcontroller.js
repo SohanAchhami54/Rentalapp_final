@@ -75,17 +75,17 @@ exports.createBooking=async(req,res)=>{//for booking we need the use id and bike
 
 
 //api to list the user bookings
-exports.getUserBookings=async(req,res)=>{
-    try {
-        console.log('userbookings',req.user);
-      const {_id}=req.user;//yo owner ko id ho
-      const bookings=await Booking.find({user:_id}).populate('bike').sort({createdAt:-1});
-        res.json({success:true,bookings});
-    } catch (error) {   
-        console.log(error.message);
-         res.json({success:false,message:error.message});
-    }
-}
+// exports.getUserBookings=async(req,res)=>{
+//     try {
+//         console.log('userbookings',req.user);
+//       const {_id}=req.user;//yo owner ko id ho
+//       const bookings=await Booking.find({user:_id}).populate('bike').sort({createdAt:-1});
+//         res.json({success:true,bookings});
+//     } catch (error) {   
+//         console.log(error.message);
+//          res.json({success:false,message:error.message});
+//     }
+// }
 
 
 

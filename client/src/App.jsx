@@ -154,15 +154,20 @@ import { useAppcontext } from "./context/AppContext";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/Error";
+import Payment from "./components/payment/Payment";
+import Success from "./components/payment/Success";
+import Failure from "./components/payment/Failure";
+
 
 
 const App = () => {
   const { user,loadingUser } = useAppcontext(); 
- if(loadingUser) return null;
+ if(loadingUser) return <div>loading app ......</div>;
   return (
     <>
       <Toaster />
       <Router> 
+      
         <Routes>
           {/* Shared layout */}
           <Route path="/" element={<Mainlayout />}>
@@ -190,6 +195,9 @@ const App = () => {
             {/* Protected route for guest users only */}
             <Route element={<ProtectedRoute allowedUsertype="guest" />}>
               <Route path="/mybooking" element={<MyBooking />} />
+              <Route  path="/payment" element={<Payment/>}/>
+              <Route  path="success" element={<Success/>}/>
+              <Route  path="failure" element={<Failure/>}/>
             </Route>
 
             {/* Protected routes for host users only */}
@@ -205,6 +213,7 @@ const App = () => {
           </Route>
            <Route path="*" element={<NotFound/>}></Route>
         </Routes>
+      
       </Router>
     </>
   );

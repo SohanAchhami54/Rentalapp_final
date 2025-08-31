@@ -8,7 +8,7 @@
   export const AppProvider=({children})=>{
       console.log('App Provider is mounted');
       const currency=import.meta.env.VITE_CURRENCY;
-      const [token,setToken]=useState(null);
+      const [token,setToken]=useState(localStorage.getItem('token'));
       const [user,setUser]=useState('');
       const [isLogged,setIsLogged]=useState(false);
       const [showLogin,setShowLogin]=useState(false);
@@ -24,11 +24,13 @@
           if(data.success){
               console.log("data of the user is:", data);
               setUser(data.user);
+              setIsLogged(true);
              
           }else{
               //navigate('/');
               localStorage.removeItem('token');
               setToken(null);
+              setIsLogged(false);
           }
         
           } catch (error) {
@@ -75,8 +77,9 @@
     if(token){ 
       // axios.defaults.headers.common['Authorization']=` ${token}`;
        axios.defaults.headers.common['Authorization'] = `${token}`;
-      setIsLogged(true); //mark user as a logged in 
+     
       fetchUser();
+       setIsLogged(true); //mark user as a logged in 
     }
     else{
       setIsLogged(false);

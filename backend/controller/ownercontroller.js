@@ -17,7 +17,7 @@ exports.changeRoletoOwner=async(req,res)=>{  //this is changeroletoowner.
 
 
 //api to list the bike
-exports.postAddBike=async(req,res)=>{
+exports.postAddBike=async(req,res)=>{   
   try {
      const{_id}=req.user; //kun host ley upload gareko ho tyo hunxa.
      console.log(req);

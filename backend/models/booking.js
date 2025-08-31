@@ -31,4 +31,5 @@ const bookingSchema=mongoose.Schema({
 
   
 },{timestamps:true});
+bookingSchema.index({returnDate:1},{ expireAfterSeconds:0});
 module.exports=mongoose.model('Booking',bookingSchema);

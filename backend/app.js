@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const {authRouter} = require('./routes/authRouter');
 const {ownerRouter} = require('./routes/ownerRouter');
 const {bookingRouter} = require('./routes/bookingRouter');
+const { guestbookingRouter } = require('./routes/userRouter');
 const app = express();
 // Middleware
 app.use(express.json());// parse json data in incoming requests req.body
@@ -25,14 +26,15 @@ app.get('/', (req, res) => {
  app.use('/api/user', authRouter);//route banauna lako 
  app.use('/api/owner', ownerRouter);
  app.use('/api/booking',bookingRouter)
+ app.use('/api/guestbooking',guestbookingRouter);
 // Connect to MongoDB and then start server
 mongoose.connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log('mongodb database connected successfully')
-    const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => {
+  .then(()=>{
+    console.log('mongodb database connected successfully');
+    const PORT=process.env.PORT||3000;
+    app.listen(PORT,()=>{
       console.log(`Server is running at the port ${PORT}`);
-    });
+    })
   })
   .catch((err) => {
     console.log('Error occurred while connecting to the database', err);

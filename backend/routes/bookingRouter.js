@@ -9,7 +9,7 @@ const middleware = require('../middleware/auth');
 
 bookingRouter.post('/create',middleware.protect,bookcontroller.createBooking);
 //to get the user's own booking
-bookingRouter.get('/user',middleware.protect,bookcontroller.getUserBookings);
+// bookingRouter.get('/user',middleware.protect,bookcontroller.getUserBookings);
 bookingRouter.get('/owner',middleware.protect,bookcontroller.getOwnerBookings);
 
 bookingRouter.post('/change-status',middleware.protect,bookcontroller.changeBookingStatus);

@@ -17,7 +17,7 @@
                 return res.json({ success: false, message: 'Fill all the field' });
             }
 
-
+          // email=email.toLowerCase().trim();
             const userExists = await User.findOne({ email })
             if (userExists) {
                 return res.json({ success: false, message: 'User already exists' });
@@ -26,6 +26,7 @@
             const hashedpassword =await bcrypt.hash(password, 12);
             const user=new User({firstname,lastname,usertype,address,email,password:hashedpassword});
             await user.save();
+            res.json({success:true});
             //jwt token
             //aafai generate gardinxa
             // const token=generateToken(user._id.toString()); //send the token to the frontend
