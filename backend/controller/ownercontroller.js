@@ -27,7 +27,7 @@ exports.postAddBike=async(req,res)=>{
      //it will provide the file buffer and we uploadinimagekit
     const fileBuffer= fs.readFileSync(imageFile.path);//to read the image.
     const response= await imagekit.upload({
-        file:fileBuffer,
+        file:fileBuffer, //path of the image
         fileName:imageFile.originalname, //to store the original name in the imageKit
         folder:'/bikes'  //to save the image inside the bike folder in imagekit
     });
@@ -56,7 +56,14 @@ res.json({success:true,message:'bike added'});
        res.json({success:false,message:error.message});
   }
 }
-
+//image ko response aauxa 
+// {
+//   fileId: "abc123",
+//   name: "bike.jpg",
+//   url: "https://ik.imagekit.io/yourid/bikes/bike.jpg",
+//   filePath: "/bikes/bike.jpg",
+//   ...
+// }
 
 // req = {
 //   method: "POST",
@@ -204,10 +211,9 @@ exports.getDashboardData=async(req,res)=>{
 
 
         //calculate monthly revenue from booking where status is confirmed
-      const monthlyRevenue=booking.slice().filter(booking=>booking.status==='confirmed').reduce((acc,booking)=>{
+      const monthlyRevenue=booking.filter(booking=>booking.status==='confirmed').reduce((acc,booking)=>{
         return acc+booking.price
         },0);
-
         const dashboardData={
             totalbikes:bike.length,
             totalbooking:booking.length,
@@ -256,5 +262,68 @@ exports.updateHostImage=async(req,res)=>{
         console.log(error.message);
         res.json({success:false,message:error.message});
     }
-
 }
+//image ko response aauxa 
+// {
+//   fileId: "abc123",
+//   name: "bike.jpg",
+//   url: "https://ik.imagekit.io/yourid/bikes/bike.jpg",
+//   filePath: "/bikes/bike.jpg",
+//   ...
+// }
+
+
+//  body: {
+//     bikeData: `{
+//       "brand": "Pulsar",
+//       "model": "NS200",
+//       "year": 2022,
+//       "pricePerDay": 1200,
+//       "category": "sport",
+//       "transmission": "manual",
+//       "fuel_type": "petrol",
+//    
+//       "location": "Kathmandu",
+//       "description": "Well maintained, great for rides."
+//     }`
+//   },
+//   file: {
+//     fieldname: 'image',
+//     originalname: 'pulsar-ns200.jpg',
+//     encoding: '7bit',
+//     mimetype: 'image/jpeg',
+//     destination: 'uploads/',
+//     filename: '1689348273478-pulsar-ns200.jpg',
+//     path: 'uploads/1689348273478-pulsar-ns200.jpg',
+//     size: 152384  // bytes
+//   },
+//   user: {
+//     _id: "6877143ef7aa1ebbde9a205d",
+//     firstname: "Sohan",
+//     lastname: "Mijar",
+//     email: "sohanachhami55@gmail.com",
+//     usertype: "host",
+//     image: "",
+//     createdAt: "2025-07-16T02:53:50.771Z",
+//     updatedAt: "2025-07-16T02:53:50.771Z",
+//     __v: 0
+//   },
+//   protocol: "http",
+//   secure: false,
+//   ip: "::1",
+//   cookies: {},
+//   signedCookies: {},
+//   hostname: "localhost",
+//   xhr: false,
+//   app: {
+//     // internal express app reference
+//   },
+//   res: {
+//     // internal response object reference
+//   },
+//   route: {
+//     path: "/addbike",
+//     stack: [/* middlewares and controller */],
+//     methods: { post: true }
+//   }
+// }

@@ -2,6 +2,7 @@
 const User = require('../models/User');
 const jwt=require('jsonwebtoken');
 exports.protect=async(req,res,next)=>{
+    //console.log(req.headers);//authorization key aauxa. extra key haru aauxa.
    const token=req.headers.authorization;
    if(!token){
     return res.json({success:false,message:'Not authorized'});

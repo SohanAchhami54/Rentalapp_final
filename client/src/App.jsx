@@ -153,6 +153,7 @@ import { Signup } from "./components/Signup";
 import { useAppcontext } from "./context/AppContext";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/ProtectedRoute";
+import NotFound from "./pages/Error";
 
 
 const App = () => {
@@ -161,14 +162,14 @@ const App = () => {
   return (
     <>
       <Toaster />
-      <Router>
+      <Router> 
         <Routes>
           {/* Shared layout */}
           <Route path="/" element={<Mainlayout />}>
             {/* Public routes */}
             <Route index element={<Home />} />
-            <Route path="bikedetail/:id" element={<BikeDetails />} />
-            <Route path="bike" element={<Bikes />} />
+            <Route path="/bikedetail/:id" element={<BikeDetails />} />
+            <Route path="/bike" element={<Bikes />} />
 
             {/* Login and Signup: only show if NOT logged in */}
             {!user && (
@@ -200,12 +201,12 @@ const App = () => {
                 <Route path="/owner/managebook" element={<Managebooking />} />
               </Route>
             </Route>
-
+      
           </Route>
+           <Route path="*" element={<NotFound/>}></Route>
         </Routes>
       </Router>
     </>
   );
 };
-
  export default App;

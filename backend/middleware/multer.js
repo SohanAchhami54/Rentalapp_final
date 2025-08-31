@@ -5,3 +5,4 @@ const multer=require('multer');
 
 //A user uploads an image ➝ Multer grabs it ➝ puts it temporarily on disk ➝ attaches it to req.file ➝ now you can read it in the controller.
 exports.upload=multer({storage:multer.diskStorage({})});
+//tells multer to store files on disk temporarily.

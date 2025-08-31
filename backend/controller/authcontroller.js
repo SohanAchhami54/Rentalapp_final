@@ -70,7 +70,9 @@
     //function to get the user data using jwt token
     exports.getUserData=async(req,res)=>{
         try {
+           
             const {user}=req;
+             console.log('request',req);
             console.log('data of the user is:', user);
             res.json({success:true,user})
         } catch (error) {   

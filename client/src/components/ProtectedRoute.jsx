@@ -38,7 +38,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 const ProtectedRoute = ({ allowedUsertype }) => {
   const { user, isLogged } = useAppcontext();
 
-  if (!isLogged) {
+  if (!isLogged) {  //j ma jana khojeni login ma lanxa
     return <Navigate to="/login" replace />;
   }
 

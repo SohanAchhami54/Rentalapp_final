@@ -119,10 +119,10 @@ useEffect(()=>{  //whenver the component is loaded.
 
                  <div className='flex gap-2  justify-around items-center'>
                   {bike.isAvailable?
-                   <FaRegEyeSlash onClick={()=>toggleAvailability(bike._id)}
+                   <FaRegEye onClick={()=>toggleAvailability(bike._id)}
                    className='text-lg'/>
                    :
-                   <FaRegEye  onClick={()=>toggleAvailability(bike._id)}
+                   <FaRegEyeSlash  onClick={()=>toggleAvailability(bike._id)}
                    className='text-lg'/>
 
                     }

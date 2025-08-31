@@ -4,7 +4,7 @@ import { RiMotorbikeLine } from "react-icons/ri";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { BsFuelPump } from "react-icons/bs";
 import { useAppcontext } from "../context/AppContext";
-const BikeCard = ({bike,isHost=false}) => {
+const BikeCard = ({bike,isHost}) => {
  const {currency}=useAppcontext();
  const navigate=useNavigate();
  const handleClick=()=>{

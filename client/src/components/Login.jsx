@@ -85,7 +85,7 @@
   import { toast } from 'react-hot-toast'; // Import toast
 
   export const Login = () => {
-    const { setShowLogin, axios, setToken } = useAppcontext();
+    const { axios, setToken } = useAppcontext();
     const navigate = useNavigate(); // Initialize useNavigate
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -96,15 +96,14 @@
         const { data } = await axios.post(`/api/user/login`, { email, password });
 
         if (data.success) {
-           setToken(data.token);
-           localStorage.setItem('token', data.token);
-          // setShowLogin(false);
+           setToken(data.token);// IMMEDIATELY sets token in context
+           localStorage.setItem('token', data.token); //saves it in browser for future visits
           toast.success('Login successful!');
           navigate('/'); // Navigate to home page after successful login
         } else {
           toast.error(data.message);
         }
-      } catch (error) {
+      } catch (error) { //if backend is not connected.
         toast.error(error.response?.data?.message || 'Login failed');
       }
     };

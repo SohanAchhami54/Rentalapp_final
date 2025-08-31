@@ -127,6 +127,7 @@ const BikeDetails = () => {
                <label  htmlFor="pickup-date">Pickup Date</label>
                 <input value={pickupDate} onChange={(e)=>setPickupDate(e.target.value)}
                 type="date" id='pickup-date' className="border  px-3 py-2 rounded-lg"
+                //  give the current date and time and split only take yyyy-mm-dd
                   min={new Date().toISOString().split('T')[0]}
                required />
                {/* return date */}

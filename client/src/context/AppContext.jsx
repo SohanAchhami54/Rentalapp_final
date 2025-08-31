@@ -1,4 +1,3 @@
-
   import { createContext, useContext, useEffect, useState } from "react";
   import axios from 'axios';
   import {toast} from 'react-hot-toast';
@@ -23,7 +22,7 @@
           try {
           const {data}= await axios.get('/api/user/data') //to extract the data from the database.
           if(data.success){
-              console.log(data);
+              console.log("data of the user is:", data);
               setUser(data.user);
              
           }else{
@@ -61,11 +60,11 @@
       toast.success('You have been logout')
   }
 
-
+ //this runs for the first time or when the app is reload
   //useEffect to retrieve the token from localstorage
     useEffect(()=>{
-        const token=localStorage.getItem('token');
-        setToken(token);
+        const token=localStorage.getItem('token');//look in browser storage
+        setToken(token); //especially reload vayeko belama kam lagney vayo
         fetchBikes();
     },[]);
 
@@ -76,7 +75,7 @@
     if(token){ 
       // axios.defaults.headers.common['Authorization']=` ${token}`;
        axios.defaults.headers.common['Authorization'] = `${token}`;
-      setIsLogged(true);
+      setIsLogged(true); //mark user as a logged in 
       fetchUser();
     }
     else{

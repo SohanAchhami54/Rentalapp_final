@@ -22,7 +22,7 @@ const Managebooking = () => {
 
   //to check the changeBookingStatus
  const changeBookingStatus = async (bookingId, status) => {
-		try {
+		try { 
       // for the database 
 			const { data } = await axios.post("/api/booking/change-status", {
 				bookingId,

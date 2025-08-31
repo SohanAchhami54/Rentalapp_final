@@ -11,7 +11,7 @@ const Addbike = () => {
   const {axios,currency}=useAppcontext();
   const [image,setImage]=useState(null);//this is for image.
   const [bike,setBike]=useState({ //bike details
-    brand:'',
+    brand:'',          
     model:'',
     year:0,
     pricePerDay:0,
@@ -203,3 +203,14 @@ const Addbike = () => {
 }
 
 export default Addbike
+// req.file contain data like this
+// {
+//   fieldname: 'image',
+//   originalname: 'bike.jpg',
+//   encoding: '7bit',
+//   mimetype: 'image/jpeg',
+//   destination: 'uploads/',
+//   filename: 'random123.jpg',
+//   path: 'uploads/random123.jpg',
+//   size: 12345
+// }

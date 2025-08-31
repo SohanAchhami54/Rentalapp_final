@@ -57,9 +57,9 @@ exports.createBooking=async(req,res)=>{//for booking we need the use id and bike
         const bikeData=await Bike.findById(bikeId);
 
         //calculate the price based on pickup and return date
-        const picked=new Date(pickupDate);
+        const picked=new Date(pickupDate);//js object lai create garxa string number haru bata
         const returned=new Date(returnDate);
-        const noofdays=Math.ceil((returned-picked)/(1000*60*60*24));
+        const noofdays=Math.ceil((returned-picked)/(1000*60*60*24));//returned-picked convert into milliseconds
         const price=bikeData.pricePerDay*noofdays;
        
         await Booking.create({bike:bikeId,owner:bikeData.owner,user:_id,pickupDate,returnDate,price})
@@ -78,7 +78,7 @@ exports.createBooking=async(req,res)=>{//for booking we need the use id and bike
 exports.getUserBookings=async(req,res)=>{
     try {
         console.log('userbookings',req.user);
-      const {_id}=req.user;
+      const {_id}=req.user;//yo owner ko id ho
       const bookings=await Booking.find({user:_id}).populate('bike').sort({createdAt:-1});
         res.json({success:true,bookings});
     } catch (error) {   
@@ -100,7 +100,6 @@ exports.getOwnerBookings=async(req,res)=>{
        const bookings=await Booking.find({owner:req.user._id}).populate('bike user').select('-user.password').sort({createdAt:-1});
        res.json({success:true,bookings});
     } catch (error) {
-        console.log(error.message);
          res.json({success:false,message:error.message});
     }
 }

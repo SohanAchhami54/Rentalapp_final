@@ -52,7 +52,7 @@ const Sidebar = () => {
       <div className='relative w-16 h-16'>
         <label htmlFor="image" className='block w-full h-full cursor-pointer'>
           <img
-            src={image ? URL.createObjectURL(image) : user?.image}
+            src={image ? URL.createObjectURL(image) : user?.image} 
             className='h-9 md:h-14 mx-auto rounded-full object-cover'
             alt="host"
           />

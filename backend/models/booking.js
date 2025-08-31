@@ -3,7 +3,7 @@ const {ObjectId}=mongoose.Schema.Types;
 const { Schema, Types } = mongoose;
 const bookingSchema=mongoose.Schema({
     bike:{
-        type:ObjectId,ref:'Bike',required:true
+        type:ObjectId,ref:'Bike',required:true //for storing the unique id of the docuements
     },
     user:{
         type:ObjectId,ref:'User',required:true

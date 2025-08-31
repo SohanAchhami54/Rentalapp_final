@@ -7,11 +7,11 @@ const {ownerRouter} = require('./routes/ownerRouter');
 const {bookingRouter} = require('./routes/bookingRouter');
 const app = express();
 // Middleware
-app.use(express.json());
+app.use(express.json());// parse json data in incoming requests req.body
 // app.use(express.urlencoded({extended:true}));
 app.use(cors());
 
-//it runs for every request.
+//it runs for every request. rerendered
 app.use((req,res,next)=>{
   console.log('Url:'+req.url+"Method:"+req.method);
   next();
@@ -21,7 +21,8 @@ app.use((req,res,next)=>{
 app.get('/', (req, res) => {
   res.send('hello');
 });
- app.use('/api/user', authRouter);
+
+ app.use('/api/user', authRouter);//route banauna lako 
  app.use('/api/owner', ownerRouter);
  app.use('/api/booking',bookingRouter)
 // Connect to MongoDB and then start server
