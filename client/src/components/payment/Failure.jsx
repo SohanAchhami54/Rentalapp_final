@@ -2,7 +2,7 @@ import React from 'react'
 
 const Failure = () => {
   return (
-    <div>
+    <div className='flex justify-center'>
       <p>Transaction Fail</p>
     </div>
   )

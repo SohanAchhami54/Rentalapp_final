@@ -110,7 +110,17 @@ const Managebooking = () => {
                              
                              {/* fourth data  */}
                                <td className='p-3 max-md:hidden'>
-                                <span>offline </span>
+                              <span className={` p-2
+                               ${
+                                 booking.payment.pricestatus==="unpaid"
+                                 ?"bg-red-400 text-black  rounded-lg"
+                                 :"bg-green-400 text-black rounded-lg"
+                               }
+                              
+                              `}
+                              
+                              
+                              > {booking.payment.pricestatus}</span> 
                               </td>
 
                               {/* fifth data  */}

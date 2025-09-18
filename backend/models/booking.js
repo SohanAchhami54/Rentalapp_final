@@ -27,7 +27,12 @@ const bookingSchema=mongoose.Schema({
     price:{
         type:Number,
         required:true,
-    }
+    },
+    payment: {
+    pricestatus: { type: String, default: "unpaid" }, // unpaid / paid / failed
+    transactionCode: { type: String },
+    method: { type: String, default: "eSewa" }, // online / esewa
+  }
 
   
 },{timestamps:true});

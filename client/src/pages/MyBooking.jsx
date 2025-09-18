@@ -170,12 +170,12 @@ import { useAppcontext } from "../context/AppContext";
 
 import toast from "react-hot-toast";
 import { Button } from "../shadcnui/button";
-
+import {useNavigate} from 'react-router';
 const MyBooking = () => {
   const { axios, user, currency } = useAppcontext();
   const [bookings, setBookings] = useState([]);
   const [now, setNow] = useState(new Date());
-
+  const navigate=useNavigate();
   const fetchMyBookings = async () => {
     try {
       const { data } = await axios.get("/api/guestbooking/user");
@@ -195,47 +195,47 @@ const MyBooking = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const formatRemainingTime = (returnDate) => {
-    const diff = new Date(returnDate) - now;
-    if (diff <= 0) return "Expired";
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
-  };
+    const formatRemainingTime = (returnDate) => {
+      const diff = new Date(returnDate) - now;
+      if (diff <= 0) return "Expired";
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    };
 
-const handlePayment = async (bookingId) => {
-  try {
-    const { data } = await axios.post(`/api/guestbooking/payment`,{bookingId});
-   // const { data } = await axios.get(`/api/guestbooking/payment/${bookingId}`);
+// const handlePayment = async (bookingId) => {
+//   try {
+//     const { data } = await axios.post(`/api/guestbooking/payment`,{bookingId});
+//    // const { data } = await axios.get(`/api/guestbooking/payment/${bookingId}`);
 
-    console.log("Payment API response:", data);
+//     console.log("Payment API response:", data);
 
-    if (!data.success) return toast.error(data.message || "Payment initiation failed");
+//     if (!data.success) return toast.error(data.message || "Payment initiation failed");
 
-    const pd = data.paymentData;
+//     const pd = data.paymentData;
 
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
-//Iterates over every field in paymentData (amount, total_amount, transaction_uuid, etc.).
-    Object.keys(pd).forEach((key) => { //
-      const input = document.createElement("input");
-      input.type = "hidden"; //For each field, creates an hidden input:
-      input.name = key;
-      input.value = pd[key];
-      form.appendChild(input);
-    });
+//     const form = document.createElement("form");
+//     form.method = "POST";
+//     form.action = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
+// //Iterates over every field in paymentData (amount, total_amount, transaction_uuid, etc.).
+//     Object.keys(pd).forEach((key) => { //
+//       const input = document.createElement("input");
+//       input.type = "hidden"; //For each field, creates an hidden input:
+//       input.name = key;
+//       input.value = pd[key];
+//       form.appendChild(input);  
+//     });
 
-    document.body.appendChild(form);
-    form.submit();  //Calls form.submit() → redirects the user to eSewa payment page.
-    //document.body.removeChild(form);
-  } catch (error) {
-    toast.error("Payment failed to initiate");
-    console.error(error);
-  }
-};
+//     document.body.appendChild(form);
+//     form.submit();  //Calls form.submit() → redirects the user to eSewa payment page.
+//     //document.body.removeChild(form);
+//   } catch (error) {
+//     toast.error("Payment failed to initiate");
+//     console.error(error);
+//   }
+// };
 
 
   return (
@@ -283,18 +283,32 @@ const handlePayment = async (bookingId) => {
                 <p className="text-gray-500 text-sm md:text-lg">Time Remaining</p>
                 {booking.status === 'confirmed' ? (
                   <p>{formatRemainingTime(booking.returnDate)}</p>
-                ) : (
+                ) :booking.status==="cancelled"?(
+                <p className="text-gray-500">Your booking is Cancelled</p>)
+                : (
                   <p className="text-gray-500">Waiting for payment</p>
                 )}
               </div>
 
               {booking.status === 'pending' && (
                 <div className="mt-2">
-                  <Button
+                  {/* <Button
                     onClick={() => handlePayment(booking._id)}
-                    className="bg-black text-white"
+                    className="bg-green-500 font-bold"
                   >
-                    Pay Now
+                    Pay via eSewa
+                  </Button> */}
+                  <Button 
+                   onClick={()=>navigate('/payment',{state:{total_amount:booking.price,bookingId:booking._id}})}
+                   className="bg-green-500 rounded-lg font-medium"
+                   >
+                   {/* {booking.payment.pricestatus==="unpaid"?
+                   "Pay Via eSewa"
+                   :booking.payment.pricestatus==="paid"?
+                   "Payment done Thank You"
+                   :"Payment failure"
+                  } */}
+                  Pay via eSewa
                   </Button>
                 </div>
               )}

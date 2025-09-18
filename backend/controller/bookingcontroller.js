@@ -91,38 +91,49 @@ exports.createBooking=async(req,res)=>{//for booking we need the use id and bike
 
 //yo chai dashboard ko data ho.
 //api to get the  owner bookings
-exports.getOwnerBookings=async(req,res)=>{
-    console.log(req.user);
-    try {
-       if(req.user.usertype!=='host'){
-        return res.json({success:false,message:'Unauthorized'});
-       }
-       const bookings=await Booking.find({owner:req.user._id}).populate('bike user').select('-user.password').sort({createdAt:-1});
-       res.json({success:true,bookings});
-    } catch (error) {
-         res.json({success:false,message:error.message});
-    }
-}
-
-
-//for confirmed and cancelled the bookings
-exports.changeBookingStatus=async(req,res)=>{
-    try {
-         const {_id}=req.user;
-         const {bookingId,status}=req.body;
-         const booking=await Booking.findById(bookingId);
-         
-        if(booking.owner.toString()!==_id.toString()){
-            return res.json({success:false,message:'Unauthorized'});  
+    exports.getOwnerBookings=async(req,res)=>{
+        console.log(req.user);
+        try {
+        if(req.user.usertype!=='host'){
+            return res.json({success:false,message:'Unauthorized'});
         }
+        const bookings=await Booking.find({owner:req.user._id}).populate('bike user').select('-user.password').sort({createdAt:-1});
+        res.json({success:true,bookings});
+        } catch (error) {
+            res.json({success:false,message:error.message});
+        }
+    }   
 
-        booking.status=status;
-        await booking.save()
-        res.json({success:true,message:'Status Updated'});
-    } catch (error) {
-        console.log(error.message);
-         res.json({success:false,message:error.message});
+
+    //for confirmed and cancelled the bookings
+    exports.changeBookingStatus=async(req,res)=>{
+        try {
+            const {_id}=req.user;
+            const {bookingId,status}=req.body;
+            const booking=await Booking.findById(bookingId);
+          
+            
+            if(booking.owner.toString()!==_id.toString()){
+                return res.json({success:false,message:'Unauthorized'});  
+            }
+            //if the payment is not done yet.
+            if(booking.payment.pricestatus==="unpaid" && status==="confirmed"){
+                return res.json({success:false, message:'Payment has not been done yet'});
+            }
+
+
+            //the payment has already been done and host cannot change the status
+            if(booking.payment.pricestatus==="paid"){
+                return res.json({success:false, message:'Payment has already been done. Status cannot be changed.'})
+            }
+           
+            booking.status=status;  
+            await booking.save()
+            res.json({success:true,message:'Status Updated'});
+        } catch (error) {
+            console.log(error.message);
+            res.json({success:false,message:error.message});
+        }
     }
-}
 
 
