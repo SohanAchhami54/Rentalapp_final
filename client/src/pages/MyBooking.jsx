@@ -290,7 +290,7 @@ const MyBooking = () => {
                 )}
               </div>
 
-              {booking.status === 'pending' && (
+              {booking.status === 'pending' && booking.paymentAllowed&&(
                 <div className="mt-2">
                   {/* <Button
                     onClick={() => handlePayment(booking._id)}

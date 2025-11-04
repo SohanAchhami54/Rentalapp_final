@@ -19,6 +19,14 @@ const bookingSchema=mongoose.Schema({
         type:Date,
         required:true,
     },
+     priorityScore:{
+        type:Number,
+        required:true
+    },
+    paymentAllowed:{
+        type:Boolean,
+        default:false
+    },
     status:{
           type:String, 
           enum:['pending','confirmed','cancelled'],

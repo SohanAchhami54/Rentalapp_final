@@ -40,38 +40,73 @@ exports.checkAvailability=async(bike,pickupDate,returnDate)=>{
 // }
 
 
-//for booking the bike
-exports.createBooking=async(req,res)=>{//for booking we need the use id and bike details
-    try {
-       const {_id}=req.user;//req.user contains info about the logged-in user (like ID, name, email). 
-       console.log('req.user:',req.user);
-       const {bikeId,pickupDate,returnDate}=req.body;
-       console.log('req.body:',req.body);
-       const isAvailable=await this.checkAvailability(bikeId, pickupDate,returnDate);
+// Helper function to calculate booking priority
+function calculatePriority(pickupDate, returnDate, bookingDate) {
+  const pickup = new Date(pickupDate);
+  const returnD = new Date(returnDate);
+  const booking = new Date(bookingDate);
 
-       if(!isAvailable){
-        return res.json({success:false,message:'bike is not available'});
-       }
+  // Duration of booking in days
+  const durationInDays = (returnD - pickup) / (1000 * 60 * 60 * 24);
 
-       //if the bike is ava ilable
-        const bikeData=await Bike.findById(bikeId);
+  // Urgency (gap between booking and pickup)
+  const urgencyInDays = (pickup - booking) / (1000 * 60 * 60 * 24);
 
-        //calculate the price based on pickup and return date
-        const picked=new Date(pickupDate);//js object lai create garxa string number haru bata
-        const returned=new Date(returnDate);
-        const noofdays=Math.ceil((returned-picked)/(1000*60*60*24));//returned-picked convert into milliseconds
-        const price=bikeData.pricePerDay*noofdays;
-       
-        await Booking.create({bike:bikeId,owner:bikeData.owner,user:_id,pickupDate,returnDate,price})
-        res.json({success:true,message:'Booking created'});
+  // Scoring logic
+  const urgencyScore = Math.max(0, 10 - urgencyInDays);
+  const durationScore = Math.min(durationInDays, 10);
 
-
-
-    } catch (error) {
-         console.log(error.message);
-         res.json({success:false,message:error.message});
-    }
+  // Weighted final score
+  return (2 * urgencyScore) + durationScore;
 }
+
+//for booking the bike
+exports.createBooking = async (req, res) => {
+  try {
+    const { _id } = req.user; // Logged-in user
+    const { bikeId, pickupDate, returnDate } = req.body;
+
+    console.log('req.user:', req.user);
+    console.log('req.body:', req.body);
+
+    // Fetch bike details
+    const bikeData = await Bike.findById(bikeId);
+    if (!bikeData) {
+      return res.json({ success: false, message: 'Bike not found' });
+    }
+
+    // Calculate booking duration in days
+    const picked = new Date(pickupDate);
+    const returned = new Date(returnDate);
+    const noofdays = Math.ceil((returned - picked) / (1000 * 60 * 60 * 24));
+    const price = bikeData.pricePerDay * noofdays;
+
+    // Calculate priority score (using today's date as bookingDate)
+    const bookingDate = new Date();
+    const priorityScore =Math.floor(calculatePriority(pickupDate, returnDate, bookingDate));
+
+    // Save booking with priority
+    await Booking.create({
+      bike: bikeId,
+      owner: bikeData.owner,
+      user: _id,
+      pickupDate,
+      returnDate,
+      price,
+      priorityScore, // new field added
+    });
+
+    res.json({
+      success: true,
+      message: 'Booking created successfully',
+      priorityScore,
+    });
+
+  } catch (error) {
+    console.log(error.message);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 
 //api to list the user bookings
@@ -137,3 +172,22 @@ exports.createBooking=async(req,res)=>{//for booking we need the use id and bike
     }
 
 
+exports.allowpayment = async (req, res) => {
+  try {
+    const { bookingId, payallow } = req.body;
+    const booking = await Booking.findByIdAndUpdate(
+      bookingId,
+      { paymentAllowed: payallow }, // ✅ Consistent naming
+      { new: true }
+    );
+    if (!booking) {
+      return res.json({ success: false, message: "Booking not found" });
+    }
+    res.json({
+      success: true,
+      message: payallow ? "Payment enabled for user" : "Payment disabled",
+    });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};

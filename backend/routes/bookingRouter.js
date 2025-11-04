@@ -13,6 +13,7 @@ bookingRouter.post('/create',middleware.protect,bookcontroller.createBooking);
 bookingRouter.get('/owner',middleware.protect,bookcontroller.getOwnerBookings);
 
 bookingRouter.post('/change-status',middleware.protect,bookcontroller.changeBookingStatus);
+bookingRouter.post('/allowpayment',middleware.protect,bookcontroller.allowpayment);
 
 module.exports={
     bookingRouter:bookingRouter,

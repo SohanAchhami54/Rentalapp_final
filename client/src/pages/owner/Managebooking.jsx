@@ -42,7 +42,27 @@ const Managebooking = () => {
 		}
 	};
 
-
+const paymentAllow = async (bookingId, payallow) => {
+  try {
+    // ✅ Added leading slash
+    const { data } = await axios.post('/api/booking/allowpayment', {
+      bookingId,
+      payallow
+    });
+    if (data.success) {
+      toast.success(data.message);
+      setBookings((prev) =>
+        prev.map((b) =>
+          b._id === bookingId ? { ...b, paymentAllowed: payallow } : b
+        )
+      );
+    } else {
+      toast.error(data.message);
+    }
+  } catch (error) {
+    toast.error('Failed to update payment permission');
+  }
+};
 
 
   useEffect(()=>{  //whenever the component get load it function the function inside it
@@ -71,6 +91,7 @@ const Managebooking = () => {
                 <th className='font-medium px-3 py-2'>Total</th>
                 <th className='font-medium px-3 py-2 max-md:hidden'>Name of user</th>
                 <th className='font-medium px-3 py-2 max-md:hidden'>Payment</th>
+                <th className='font-medium px-3 py-2 max-md:hidden'>P.Score</th>
                 <th className='font-medium px-3 py-2'>Actions</th>
                 </tr>
               </thead>
@@ -124,6 +145,15 @@ const Managebooking = () => {
                               </td>
 
                               {/* fifth data  */}
+                               <td className='p-3 max-md:hidden'>
+                                {booking.priorityScore} 
+                                 <input type="checkbox"
+                                 checked={booking.paymentAllowed||false}
+                                 onChange={(e)=>paymentAllow(booking._id,e.target.checked)}
+                                 />
+                                </td>
+
+                              {/* Sixth data  */}
                             <td className="p-3 ">
 										   	<select
                        onChange={(e) => changeBookingStatus(booking._id, e.target.value)}
