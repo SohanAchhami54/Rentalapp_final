@@ -59,7 +59,7 @@ useEffect(()=>{  //whenver the component is loaded.
 },[])
   return (
     <>
-      <div className='px-4 pt-10 md:px-10 w-full'>
+      <div className='px-4 pt-5 md:px-10 w-full'>
          <Title title='Manage Bike' subTitle='View all the bike, update the details,or remove them from the booking platform. ' />
          {/* for the table  */}
          <div className=' border mt-6 rounded-lg  w-full max-w-5xl '>

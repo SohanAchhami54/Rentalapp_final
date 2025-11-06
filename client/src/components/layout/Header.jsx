@@ -127,6 +127,10 @@ const Header = () => {
               {/* <NavLink to={'/mybooking'} > <li>My Booking</li> </NavLink> */}
               {user?.usertype === 'guest' && (
               <NavLink to='/mybooking'><li>My Booking</li></NavLink>
+              
+             )}
+             {user?.usertype==='guest'&&(
+              <h2>Hi.{user.firstname}</h2>
              )}
 
               {/* <NavLink to={'/owner'} ><li> Dashboard </li></NavLink> */}
@@ -170,6 +174,9 @@ const Header = () => {
                {user?.usertype === 'guest' && (
                 <NavLink to='/mybooking' onClick={() => setOpen(false)}><li>My Booking</li></NavLink>
               )}
+              {user?.usertype==='guest'&&(
+              <h2 onClick={()=>setOpen(false)}>Hi.{user.firstname}</h2>
+             )}
                 
                 {user?.usertype === 'host' && (
                 <NavLink to='/owner' onClick={() => setOpen(false)}><li>Dashboard</li></NavLink>

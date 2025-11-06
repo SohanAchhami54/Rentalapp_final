@@ -3,14 +3,14 @@ const Bike = require('../models/bike');
 const Booking=require('../models/booking');
 const ownerRouter = require('../routes/ownerRouter');
 
-exports.checkAvailability=async(bike,pickupDate,returnDate)=>{
-    const bookings=await Booking.find({
-        bike,
-        pickupDate:{$lte:returnDate},
-        returnDate:{$gte:pickupDate},
-    })
-    return bookings.length===0;
-}
+// exports.checkAvailability=async(bike,pickupDate,returnDate)=>{
+//     const bookings=await Booking.find({
+//         bike,
+//         pickupDate:{$lte:returnDate},
+//         returnDate:{$gte:pickupDate},
+//     })
+//     return bookings.length===0;
+// }
 
 
 // //for the home page data
@@ -41,6 +41,7 @@ exports.checkAvailability=async(bike,pickupDate,returnDate)=>{
 
 
 // Helper function to calculate booking priority
+//Greedy based Priority Algorithm
 function calculatePriority(pickupDate, returnDate, bookingDate) {
   const pickup = new Date(pickupDate);
   const returnD = new Date(returnDate);

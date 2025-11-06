@@ -42,13 +42,42 @@ const Managebooking = () => {
 		}
 	};
 
-const paymentAllow = async (bookingId, payallow) => {
+const paymentAllow = async (bookingId, payallow, paymentStatus) => {
   try {
-    // ✅ Added leading slash
-    const { data } = await axios.post('/api/booking/allowpayment', {
+    //  If payment is already done, block unclicking
+    if (paymentStatus === "paid" && payallow === false) {
+      toast.error("Payment already done. Cannot unclick the button.");
+      // Revert checkbox UI immediately
+      setBookings((prev) =>
+        prev.map((b) =>
+          b._id === bookingId ? { ...b, paymentAllowed: true } : b
+        )
+      );
+      return;
+    }
+
+    // If payment is unpaid and host tries to unclick, ask confirmation
+    if (paymentStatus === "unpaid" && payallow === false) {
+      const confirmUnclick = window.confirm(
+        "Are you sure you want to change the status?"
+      );
+      if (!confirmUnclick) {
+        // Revert back if cancelled
+        setBookings((prev) =>
+          prev.map((b) =>
+            b._id === bookingId ? { ...b, paymentAllowed: true } : b
+          )
+        );
+        return;
+      }
+    }
+
+    //  Proceed with normal update
+    const { data } = await axios.post("/api/booking/allowpayment", {
       bookingId,
-      payallow
+      payallow,
     });
+
     if (data.success) {
       toast.success(data.message);
       setBookings((prev) =>
@@ -60,10 +89,9 @@ const paymentAllow = async (bookingId, payallow) => {
       toast.error(data.message);
     }
   } catch (error) {
-    toast.error('Failed to update payment permission');
+    toast.error("Failed to update payment permission");
   }
 };
-
 
   useEffect(()=>{  //whenever the component get load it function the function inside it
     fetchOwnerBookings();
@@ -72,7 +100,7 @@ const paymentAllow = async (bookingId, payallow) => {
 
   return (
      <>
-      <div className='px-4 pt-10 md:px-10 w-full'>
+      <div className='px-4 pt-5 md:px-10 w-full'>
          <Title title='Manage  Bookings' subTitle='Track all customer bookings,approve or cancel request, and manage booking status ' />
          {/* for the table  */}
          <div className=' border mt-6 rounded-lg  w-full max-w-5xl '>
@@ -149,7 +177,7 @@ const paymentAllow = async (bookingId, payallow) => {
                                 {booking.priorityScore} 
                                  <input type="checkbox"
                                  checked={booking.paymentAllowed||false}
-                                 onChange={(e)=>paymentAllow(booking._id,e.target.checked)}
+                                 onChange={(e)=>paymentAllow(booking._id,e.target.checked,booking.payment.pricestatus)}
                                  />
                                 </td>
 

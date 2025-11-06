@@ -4,16 +4,16 @@ const Bike=require('../models/bike');
 const Booking=require('../models/booking');
 const fs=require('fs');
 //api to change the role
-exports.changeRoletoOwner=async(req,res)=>{  //this is changeroletoowner.
-   try {
-     const {_id}=req.user;
-     await User.findByIdAndUpdate(_id,{usertype:'host'});
-     res.json({success:true,message:'Now u can list the bike.'})
-   } catch (error) {
-       console.log(error.message);
-       res.json({success:false,message:error.message});
-   }
-}   
+// exports.changeRoletoOwner=async(req,res)=>{  //this is changeroletoowner.
+//    try {
+//      const {_id}=req.user;
+//      await User.findByIdAndUpdate(_id,{usertype:'host'});
+//      res.json({success:true,message:'Now u can list the bike.'})
+//    } catch (error) {
+//        console.log(error.message);
+//        res.json({success:false,message:error.message});
+//    }
+// }   
 
 
 //api to list the bike
